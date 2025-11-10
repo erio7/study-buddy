@@ -1,25 +1,169 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <title>StudyBuddy - Teste seu Conhecimento</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>StudyBuddy - Perguntas</title>
+
+  <!-- Fontes (igual às outras páginas) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Estilos globais -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Estilo específico embutido da página QUESTIONS -->
+  <style>
+    /* =========================
+       QUESTIONS PAGE
+       ========================= */
+    .question-enunciado {
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--color-text-primary);
+      margin-bottom: 12px;
+    }
+
+    .question-form {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .question-form label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #1f1f27;
+      padding: 8px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background .2s ease;
+    }
+
+    .question-form label:hover {
+      background: #2b2b35;
+    }
+
+    .question-form input[type="radio"] {
+      accent-color: var(--color-primary);
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+
+    .submit-area {
+      margin-top: 24px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .btn-primary {
+      background: var(--color-primary);
+      border: none;
+      padding: 12px 20px;
+      color: #fff;
+      font-weight: 600;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background .2s ease;
+    }
+
+    .btn-primary:hover {
+      background: #7c3aed;
+    }
+
+    @media (max-width: 768px) {
+      .question-enunciado {
+        font-size: 16px;
+      }
+      .btn-primary {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
-    <main class="page-container">
-        <h1>Teste seu conhecimento</h1>
-        <div class="question-container">
-            <p class="question-enunciado">
-                Aqui ficará o enunciado da pergunta...
-            </p>
-            <div class="question-options">
-                <a href="#" class="btn btn-outline">Opcao A</a>
-                <a href="#" class="btn btn-outline">Opcao B</a>
-                <a href="#" class="btn btn-outline">Opcao C</a>
-                <a href="#" class="btn btn-outline">Opcao D</a>
-            </div>
-            
-            <a href="results.html" class="btn btn-primary">Enviar Respostas</a>
-        </div>
-    </main>
+
+  <div class="page-shell">
+    <div class="board">
+      <!-- SIDEBAR (hotbar) -->
+      <aside class="hotbar" aria-label="Navegação lateral">
+        <div class="hotbar-title">Navegação</div>
+
+        <a href="home.html" class="hotbar-link">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span>Home</span>
+        </a>
+
+        <a href="profile.html" class="hotbar-link">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          <span>Perfil</span>
+        </a>
+
+        <a href="create-challenge.html" class="hotbar-link">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          <span>Criar Desafio</span>
+        </a>
+
+        <a href="friends.html" class="hotbar-link">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          <span>Amigos</span>
+        </a>
+
+        <a href="challenge-detail.html" class="hotbar-link">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          <span>Desafio</span>
+        </a>
+
+        <a href="resumo.html" class="hotbar-link">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22h11A2.5 2.5 0 0 0 20 19.5V6a2 2 0 0 0-2-2h-3.5L12 2 9.5 4H6a2 2 0 0 0-2 2z"/></svg>
+          <span>Resumo</span>
+        </a>
+
+        <a href="questions.html" class="hotbar-link active">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 1 1 5.82 1c0 2-3 2-3 4"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+          <span>Perguntas</span>
+        </a>
+
+        <a href="results.html" class="hotbar-link">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <span>Resultados</span>
+        </a>
+
+        <a href="add-friends.html" class="hotbar-link">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M15 14a4 4 0 0 0-8 0v2"></path><circle cx="11" cy="8" r="4"></circle><path d="M19 8v6"></path><path d="M22 11h-6"></path></svg>
+          <span>Adicionar Amigos</span>
+        </a>
+      </aside>
+
+      <!-- CONTEÚDO (coluna central) -->
+      <main class="content" role="main">
+        <h1 id="page-title"></h1>
+
+        <!-- Cartão com a pergunta atual -->
+        <section class="card" id="question-card" data-question-id="">
+          <div id="question-enunciado" class="question-enunciado"></div>
+
+          <form id="question-form" class="question-form" data-question-type="">
+            <!-- conteúdo das alternativas será carregado dinamicamente -->
+          </form>
+
+          <div class="submit-area">
+            <button id="btn-submit" class="btn-primary" type="button">Enviar respostas</button>
+          </div>
+        </section>
+
+        <!-- Paginação de questões (opcional) -->
+        <div id="question-pagination" class="card" style="display:none"></div>
+      </main>
+
+      <!-- RIGHT RAIL (opcional) -->
+      <aside class="right-rail" id="right-rail" style="display:none"></aside>
+    </div>
+  </div>
+
 </body>
 </html>

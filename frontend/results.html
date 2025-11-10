@@ -1,60 +1,108 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StudyBuddy - Resultado do Teste</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>StudyBuddy - Resultado do Teste</title>
+
+  <!-- Fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Estilos globais -->
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-    <main class="page-container">
-        
-        <h1>Resultado</h1>
-        <p class="results-subtitle">Voce foi muito bem!</p>
+  <div class="page-shell">
+    <div class="board">
+      <!-- SIDEBAR (hotbar) -->
+      <aside class="hotbar" aria-label="Navegação lateral">
+        <div class="hotbar-title">Navegação</div>
+
+        <a href="home.html" class="hotbar-link">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span>Home</span>
+        </a>
+
+        <a href="profile.html" class="hotbar-link">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span>Perfil</span>
+        </a>
+
+        <a href="create-challenge.html" class="hotbar-link">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          <span>Criar Desafio</span>
+        </a>
+
+        <a href="friends.html" class="hotbar-link">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span>Amigos</span>
+        </a>
+
+        <a href="challenge-detail.html" class="hotbar-link">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span>Desafio</span>
+        </a>
+
+        <a href="resumo.html" class="hotbar-link">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22h11A2.5 2.5 0 0 0 20 19.5V6a2 2 0 0 0-2-2h-3.5L12 2 9.5 4H6a2 2 0 0 0-2 2z"/></svg>
+          <span>Resumo</span>
+        </a>
+
+        <a href="questions.html" class="hotbar-link">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 1 1 5.82 1c0 2-3 2-3 4"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <span>Perguntas</span>
+        </a>
+
+        <a href="results.html" class="hotbar-link active">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Resultados</span>
+        </a>
+
+        <a href="add-friends.html" class="hotbar-link">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M15 14a4 4 0 0 0-8 0v2"/><circle cx="11" cy="8" r="4"/><path d="M19 8v6"/><path d="M22 11h-6"/></svg>
+          <span>Adicionar Amigos</span>
+        </a>
+      </aside>
+
+      <!-- CONTEÚDO (coluna central) -->
+      <main class="content">
+        <h1 id="result-title">Resultado</h1>
+        <p id="result-subtitle" class="results-subtitle"></p>
 
         <div class="results-layout">
+          <!-- Lista de questões e respostas dinâmicas -->
+          <section class="results-list" id="results-list">
+            <!-- preencha dinamicamente -->
+          </section>
 
-            <section class="results-list">
-                
-                <div class="result-item">
-                    <h4>Questão 1</h4>
-                    <ul class="result-item-answers">
-                        <li class="correct">Alternativa A</li>
-                    </ul>
-                </div>
-
-                <div class="result-item">
-                    <h4>Questão 2</h4>
-                    <ul class="result-item-answers">
-                        <li class="incorrect">Alternativa A</li>
-                        <li class="info">Alternativa C</li>
-                    </ul>
-                </div>
-            </section>
-
-            <aside class="results-score">
-                <div class="card score-card">
-                    <div class="score-earned">
-                        <h3>Pontuação</h3>
-                        <span>+3 Pontos</span>
-                    </div>
-                    <div class="score-divider"></div>
-                    <div class="score-total">
-                        <span>Total: 9 Pontos</span>
-                    </div>
-                </div>
-            </aside>
+          <!-- Painel de pontuação -->
+          <aside class="results-score" id="results-score">
+            <div class="card score-card">
+              <div class="score-earned">
+                <h3>Pontuação</h3>
+                <span id="score-earned">+0 Pontos</span>
+              </div>
+              <div class="score-divider"></div>
+              <div class="score-total">
+                <span id="score-total">Total: 0 Pontos</span>
+              </div>
+            </div>
+          </aside>
         </div>
 
         <div class="btn-group">
-            <a href="challenge-detail.html" class="btn btn-secondary">Voltar ao Desafio</a>
-            <a href="home.html" class="btn btn-primary">Ir para Home</a>
+          <a href="challenge-detail.html" class="btn btn-secondary">Voltar ao Desafio</a>
+          <a href="home.html" class="btn btn-primary">Ir para Home</a>
         </div>
-    </main>
-    
-    </body>
+      </main>
+
+      <!-- RIGHT RAIL -->
+      <aside class="right-rail" id="right-rail" style="display:none"></aside>
+    </div>
+  </div>
+
+</body>
 </html>
