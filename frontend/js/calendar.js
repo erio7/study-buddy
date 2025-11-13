@@ -150,10 +150,8 @@
    */
   function handleDayClick(dateStr) {
     console.log('Dia clicado:', dateStr);
-    // Aqui você pode adicionar lógica para mostrar resumos do dia, etc.
-    // Por exemplo: window.location.href = `resumo.html?date=${dateStr}`;
     
-    // Feedback visual
+    // Feedback visual com animação
     const dayEl = document.querySelector(`[data-date="${dateStr}"]`);
     if (dayEl) {
       dayEl.style.transform = 'scale(0.95)';
@@ -161,6 +159,11 @@
         dayEl.style.transform = '';
       }, 150);
     }
+    
+    // Navegar para a página de visualização do dia com animação
+    setTimeout(() => {
+      window.location.href = `day-view.html?date=${dateStr}`;
+    }, 150);
   }
 
   /**

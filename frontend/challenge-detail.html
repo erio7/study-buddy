@@ -1,77 +1,207 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StudyBuddy - Detalhes do Desafio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>StudyBuddy - Detalhes do Desafio</title>
+  <meta name="description" content="Visualize os detalhes e progresso do seu desafio">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <main class="page-container">
-        
-        <a href="home.html" class="btn-home">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-            <span>Home</span>
+
+  <div class="page-shell">
+    <div class="board">
+      <!-- SIDEBAR (hotbar) -->
+      <aside class="hotbar" aria-label="Navegação lateral">
+        <a href="home.html" class="hotbar-brand" aria-label="Study Buddy - Home">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 5a2 2 0 0 1 2-2h9a3 3 0 0 1 3 3v12a1 1 0 0 1-1.45.9L12 16.76 5.45 18.9A1 1 0 0 1 4 18V5z"/>
+          </svg>
+          <span>Study Buddy</span>
         </a>
 
-        <h1>Desafio de quimica</h1>
-        <div class="challenge-layout">
-            
-            <aside class="challenge-sidebar">
-                <div class="card">
-                    <h3>Participantes</h3>
-                    <ol class="ranking-list">
-                         <li>
-                            <div class="avatar-sm">
-                                 <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiM5QTlBOUUiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMjAgMjF2LTJhNCA0IDAgMCAwLTQtNEg4YTQgNCAwIDAgMC00IDR2MiI+PC9wYXRoPjxjaXJjbGUgY3g9IjEyIiBjeT0iNyIgcj0iNCI+PC9jaXJjbGU+PC9zdmc+" alt="Avatar Joao">
-                            </div>
-                            <span class="rank-name">Joao</span>
-                        </li>
-                        <li>
-                            <div class="avatar-sm">
-                                 <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiM5QTlBOUUiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMjAgMjF2LTJhNCA0IDAgMCAwLTQtNEg4YTQgNCAwIDAgMC00IDR2MiI+PC9wYXRoPjxjaXJjbGUgY3g9IjEyIiBjeT0iNyIgcj0iNCI+PC9jaXJjbGU+PC9zdmc+" alt="Avatar Gabriel">
-                            </div>
-                            <span class="rank-name">Gabriel</span>
-                        </li>
-                         <li>
-                            <div class="avatar-sm">
-                                 <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiM5QTlBOUUiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMjAgMjF2LTJhNCA0IDAgMCAwLTQtNEg4YTQgNCAwIDAgMC00IDR2MiI+PC9wYXRoPjxjaXJjbGUgY3g9IjEyIiBjeT0iNyIgcj0iNCI+PC9jaXJjbGU+PC9zdmc+" alt="Avatar Guilherme">
-                            </div>
-                            <span class="rank-name">Guilherme</span>
-                        </li>
-                    </ol>
-                </div>
-            </aside>
+        <div class="hotbar-title">Navegação</div>
 
-            <section class="challenge-main-content">
-                <h3>Sua pontuação</h3>
-                <div class="stats-card">
-                    <div class="stat-item">
-                        <span class="stat-value">100pts</span>
-                        <span class="stat-label">Total Pontos</span>
-                    </div>
-                    <div class="stat-divider"></div>
-                    <div class="stat-item">
-                        <span class="stat-value">10 Horas</span>
-                        <span class="stat-label">Total Tempo</span>
-                    </div>
-                </div>
-                <button type="button" class="btn btn-primary btn-large">
-                    Iniciar Cronometro
-                </button>
-                <a href="resumo.html" class="btn btn-secondary">Registrar Estudo</a>
-            </section>
+        <a href="home.html" class="hotbar-link">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span>Home</span>
+        </a>
+
+        <a href="profile.html" class="hotbar-link">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          <span>Perfil</span>
+        </a>
+
+        <a href="create-challenge.html" class="hotbar-link">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+          <span>Criar Desafio</span>
+        </a>
+
+        <a href="challenge-detail.html" class="hotbar-link active" aria-current="page">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          <span>Desafio</span>
+        </a>
+
+        <a href="resumo.html" class="hotbar-link">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22h11A2.5 2.5 0 0 0 20 19.5V6a2 2 0 0 0-2-2h-3.5L12 2 9.5 4H6a2 2 0 0 0-2 2z"/></svg>
+          <span>Resumo</span>
+        </a>
+
+        <a href="questions.html" class="hotbar-link">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 1 1 5.82 1c0 2-3 2-3 4"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+          <span>Perguntas</span>
+        </a>
+
+        <a href="results.html" class="hotbar-link">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <span>Resultados</span>
+        </a>
+      </aside>
+
+      <!-- CONTEÚDO CENTRAL -->
+      <main class="content">
+        <!-- Cabeçalho do Desafio -->
+        <div style="margin-bottom: 32px;">
+          <h1>Desafio de Química Orgânica</h1>
+          <p style="color: var(--color-text-secondary); font-size: 16px; margin: 0;">
+            Iniciado em 1º de novembro • 30 dias de duração
+          </p>
         </div>
-    </main>
-    
-    <footer class="app-navbar">
-        <a href="challenge-detail.html" class="nav-item active"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-            <span>Desafio</span>
-        </a>
-    </footer>
+
+        <!-- Estatísticas -->
+        <div class="challenge-stats">
+          <div class="stat-card">
+            <div class="stat-icon" style="background: rgba(139, 92, 246, 0.15); color: var(--color-primary);">
+              📊
+            </div>
+            <div class="stat-content">
+              <h3>75%</h3>
+              <p>Progresso Geral</p>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon" style="background: rgba(34, 197, 94, 0.15); color: #22c55e;">
+              ✅
+            </div>
+            <div class="stat-content">
+              <h3>22/30</h3>
+              <p>Dias Completados</p>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon" style="background: rgba(59, 130, 246, 0.15); color: #3b82f6;">
+              ⏱️
+            </div>
+            <div class="stat-content">
+              <h3>44h</h3>
+              <p>Tempo Total</p>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon" style="background: rgba(249, 115, 22, 0.15); color: #f97316;">
+              🎯
+            </div>
+            <div class="stat-content">
+              <h3>18/20</h3>
+              <p>Questões Acertadas</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Barra de Progresso Detalhada -->
+        <div class="card" style="margin-bottom: 24px;">
+          <h3>Progresso Detalhado</h3>
+          <div style="margin-top: 20px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+              <span style="font-size: 14px; color: var(--color-text-secondary);">Conclusão Geral</span>
+              <span style="font-size: 14px; font-weight: 600;">75%</span>
+            </div>
+            <div style="background: rgba(255,255,255,.05); height: 12px; border-radius: 6px; overflow: hidden; margin-bottom: 24px;">
+              <div style="background: linear-gradient(90deg, var(--color-primary), var(--color-primary-hover)); height: 100%; width: 75%; border-radius: 6px; box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);"></div>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+              <span style="font-size: 14px; color: var(--color-text-secondary);">Questões Respondidas</span>
+              <span style="font-size: 14px; font-weight: 600;">90%</span>
+            </div>
+            <div style="background: rgba(255,255,255,.05); height: 12px; border-radius: 6px; overflow: hidden;">
+              <div style="background: linear-gradient(90deg, #3b82f6, #1d4ed8); height: 100%; width: 90%; border-radius: 6px;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ações Rápidas -->
+        <div class="card" style="margin-bottom: 24px;">
+          <h3>Ações Rápidas</h3>
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 20px;">
+            <button class="btn btn-primary" style="padding: 14px 20px; width: 100%; font-size: 14px;">
+              ⏱️ Iniciar Cronômetro
+            </button>
+            <button class="btn btn-secondary" style="padding: 14px 20px; width: 100%; font-size: 14px;">
+              📝 Registrar Estudo
+            </button>
+            <button class="btn btn-secondary" style="padding: 14px 20px; width: 100%; font-size: 14px;">
+              ❓ Fazer Perguntas
+            </button>
+          </div>
+        </div>
+
+        <!-- Progresso Recente -->
+        <div class="card">
+          <h3>Progresso Recente</h3>
+          <div class="progress-list" style="margin-top: 20px;">
+            <div class="progress-item">
+              <div class="progress-item-header">
+                <span class="progress-date">13 de Novembro</span>
+                <span class="progress-status">✅ Concluído</span>
+              </div>
+              <p class="progress-time" style="margin: 6px 0 0; color: var(--color-text-secondary);">
+                2h 30min de estudo • 4/5 questões acertadas
+              </p>
+            </div>
+
+            <div class="progress-item">
+              <div class="progress-item-header">
+                <span class="progress-date">12 de Novembro</span>
+                <span class="progress-status">✅ Concluído</span>
+              </div>
+              <p class="progress-time" style="margin: 6px 0 0; color: var(--color-text-secondary);">
+                2h 15min de estudo • 5/5 questões acertadas
+              </p>
+            </div>
+
+            <div class="progress-item">
+              <div class="progress-item-header">
+                <span class="progress-date">11 de Novembro</span>
+                <span class="progress-status">✅ Concluído</span>
+              </div>
+              <p class="progress-time" style="margin: 6px 0 0; color: var(--color-text-secondary);">
+                2h de estudo • 3/5 questões acertadas
+              </p>
+            </div>
+
+            <div class="progress-item">
+              <div class="progress-item-header">
+                <span class="progress-date">10 de Novembro</span>
+                <span class="progress-status">✅ Concluído</span>
+              </div>
+              <p class="progress-time" style="margin: 6px 0 0; color: var(--color-text-secondary);">
+                1h 45min de estudo • 4/5 questões acertadas
+              </p>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
   <script src="js/app.js"></script>
 </body>
 </html>

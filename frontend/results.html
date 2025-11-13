@@ -3,14 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>StudyBuddy - Resultado do Teste</title>
-
-  <!-- Fontes -->
+  <title>StudyBuddy - Resultados</title>
+  <meta name="description" content="Visualize seus resultados e desempenho">
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <!-- Estilos globais -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -34,18 +32,17 @@
         </a>
 
         <a href="profile.html" class="hotbar-link">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
           <span>Perfil</span>
         </a>
 
         <a href="create-challenge.html" class="hotbar-link">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
           <span>Criar Desafio</span>
         </a>
 
-
         <a href="challenge-detail.html" class="hotbar-link">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
           <span>Desafio</span>
         </a>
 
@@ -55,51 +52,228 @@
         </a>
 
         <a href="questions.html" class="hotbar-link">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 1 1 5.82 1c0 2-3 2-3 4"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 1 1 5.82 1c0 2-3 2-3 4"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
           <span>Perguntas</span>
         </a>
 
-        <a href="results.html" class="hotbar-link active">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg>
+        <a href="results.html" class="hotbar-link active" aria-current="page">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><polyline points="20 6 9 17 4 12"></polyline></svg>
           <span>Resultados</span>
         </a>
-
       </aside>
 
-      <!-- CONTEÚDO (coluna central) -->
+      <!-- CONTEÚDO CENTRAL -->
       <main class="content">
-        <h1 id="result-title">Resultado</h1>
-        <p id="result-subtitle" class="results-subtitle"></p>
-
-        <div class="results-layout">
-          <!-- Lista de questões e respostas dinâmicas -->
-          <section class="results-list" id="results-list">
-            <!-- preencha dinamicamente -->
-          </section>
-
-          <!-- Painel de pontuação -->
-          <aside class="results-score" id="results-score">
-            <div class="card score-card">
-              <div class="score-earned">
-                <h3>Pontuação</h3>
-                <span id="score-earned">+0 Pontos</span>
-              </div>
-              <div class="score-divider"></div>
-              <div class="score-total">
-                <span id="score-total">Total: 0 Pontos</span>
-              </div>
-            </div>
-          </aside>
+        <div style="margin-bottom: 32px;">
+          <h1>Resultados do Desafio</h1>
+          <p style="color: var(--color-text-secondary); font-size: 16px; margin: 0;">
+            Análise detalhada do seu desempenho
+          </p>
         </div>
 
-        <div class="btn-group">
-          <a href="challenge-detail.html" class="btn btn-secondary">Voltar ao Desafio</a>
-          <a href="home.html" class="btn btn-primary">Ir para Home</a>
+        <!-- Score Card -->
+        <div class="score-card" style="margin-bottom: 32px;">
+          <p class="score-label">Sua Pontuação</p>
+          <div class="score-value">90%</div>
+          <p class="score-label">18 de 20 questões acertadas</p>
+        </div>
+
+        <!-- Estatísticas Gerais -->
+        <div class="challenge-stats" style="margin-bottom: 32px;">
+          <div class="stat-card">
+            <div class="stat-icon" style="background: rgba(34, 197, 94, 0.15); color: #22c55e;">
+              ✅
+            </div>
+            <div class="stat-content">
+              <h3>18</h3>
+              <p>Acertos</p>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon" style="background: rgba(239, 68, 68, 0.15); color: #ef4444;">
+              ❌
+            </div>
+            <div class="stat-content">
+              <h3>2</h3>
+              <p>Erros</p>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon" style="background: rgba(59, 130, 246, 0.15); color: #3b82f6;">
+              ⏱️
+            </div>
+            <div class="stat-content">
+              <h3>12m 45s</h3>
+              <p>Tempo Total</p>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon" style="background: rgba(249, 115, 22, 0.15); color: #f97316;">
+              ⚡
+            </div>
+            <div class="stat-content">
+              <h3>38s</h3>
+              <p>Tempo Médio</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Análise por Questão -->
+        <div style="margin-bottom: 32px;">
+          <h2 style="margin-bottom: 20px;">Análise Detalhada</h2>
+
+          <!-- Questão 1 - Correta -->
+          <div class="result-item correct">
+            <div class="result-header">
+              <div style="flex: 1;">
+                <h3 style="margin: 0 0 8px; font-size: 16px;">Questão 1</h3>
+                <p style="color: var(--color-text-secondary); margin: 0; font-size: 14px;">
+                  Qual é o grupo funcional característico de um álcool?
+                </p>
+              </div>
+              <svg class="result-icon correct" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 24px; height: 24px;">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </div>
+            <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(34, 197, 94, 0.2);">
+              <p style="margin: 0 0 8px; font-size: 14px; color: var(--color-text-secondary);">
+                <strong>Sua resposta:</strong> Hidroxila (-OH)
+              </p>
+              <p style="margin: 0; font-size: 14px; color: #22c55e; font-weight: 600;">
+                ✓ Resposta correta!
+              </p>
+            </div>
+          </div>
+
+          <!-- Questão 2 - Correta -->
+          <div class="result-item correct">
+            <div class="result-header">
+              <div style="flex: 1;">
+                <h3 style="margin: 0 0 8px; font-size: 16px;">Questão 2</h3>
+                <p style="color: var(--color-text-secondary); margin: 0; font-size: 14px;">
+                  Qual é a diferença entre um aldeído e uma cetona?
+                </p>
+              </div>
+              <svg class="result-icon correct" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 24px; height: 24px;">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </div>
+            <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(34, 197, 94, 0.2);">
+              <p style="margin: 0 0 8px; font-size: 14px; color: var(--color-text-secondary);">
+                <strong>Sua resposta:</strong> Posição do grupo carbonila na cadeia carbônica
+              </p>
+              <p style="margin: 0; font-size: 14px; color: #22c55e; font-weight: 600;">
+                ✓ Resposta correta!
+              </p>
+            </div>
+          </div>
+
+          <!-- Questão 3 - Correta -->
+          <div class="result-item correct">
+            <div class="result-header">
+              <div style="flex: 1;">
+                <h3 style="margin: 0 0 8px; font-size: 16px;">Questão 3</h3>
+                <p style="color: var(--color-text-secondary); margin: 0; font-size: 14px;">
+                  Qual é o nome IUPAC do composto CH3-CH2-OH?
+                </p>
+              </div>
+              <svg class="result-icon correct" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 24px; height: 24px;">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </div>
+            <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(34, 197, 94, 0.2);">
+              <p style="margin: 0 0 8px; font-size: 14px; color: var(--color-text-secondary);">
+                <strong>Sua resposta:</strong> Etanol
+              </p>
+              <p style="margin: 0; font-size: 14px; color: #22c55e; font-weight: 600;">
+                ✓ Resposta correta!
+              </p>
+            </div>
+          </div>
+
+          <!-- Questão 4 - Incorreta -->
+          <div class="result-item incorrect">
+            <div class="result-header">
+              <div style="flex: 1;">
+                <h3 style="margin: 0 0 8px; font-size: 16px;">Questão 4</h3>
+                <p style="color: var(--color-text-secondary); margin: 0; font-size: 14px;">
+                  O que é uma reação de esterificação?
+                </p>
+              </div>
+              <svg class="result-icon incorrect" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 24px; height: 24px;">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </div>
+            <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(239, 68, 68, 0.2);">
+              <p style="margin: 0 0 8px; font-size: 14px; color: var(--color-text-secondary);">
+                <strong>Sua resposta:</strong> Reação de oxidação de um álcool
+              </p>
+              <p style="margin: 0 0 8px; font-size: 14px; color: #ef4444; font-weight: 600;">
+                ✗ Resposta incorreta
+              </p>
+              <p style="margin: 0; font-size: 14px; color: var(--color-text-secondary);">
+                <strong>Resposta correta:</strong> Reação entre um álcool e um ácido carboxílico
+              </p>
+            </div>
+          </div>
+
+          <!-- Questão 5 - Correta -->
+          <div class="result-item correct">
+            <div class="result-header">
+              <div style="flex: 1;">
+                <h3 style="margin: 0 0 8px; font-size: 16px;">Questão 5</h3>
+                <p style="color: var(--color-text-secondary); margin: 0; font-size: 14px;">
+                  Qual é a fórmula geral de um éter?
+                </p>
+              </div>
+              <svg class="result-icon correct" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 24px; height: 24px;">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </div>
+            <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(34, 197, 94, 0.2);">
+              <p style="margin: 0 0 8px; font-size: 14px; color: var(--color-text-secondary);">
+                <strong>Sua resposta:</strong> R-O-R'
+              </p>
+              <p style="margin: 0; font-size: 14px; color: #22c55e; font-weight: 600;">
+                ✓ Resposta correta!
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recomendações -->
+        <div style="padding: 24px; background: var(--color-primary-light); border-radius: var(--radius-medium); border: 1px solid rgba(139, 92, 246, 0.3);">
+          <h3 style="color: var(--color-primary); margin-top: 0;">💡 Recomendações</h3>
+          <ul style="color: var(--color-text-secondary); margin: 12px 0 0; padding-left: 20px; line-height: 1.8;">
+            <li>Excelente desempenho! Você acertou 90% das questões</li>
+            <li>Revise o conceito de reações de esterificação para melhorar ainda mais</li>
+            <li>Continue praticando com mais desafios para consolidar seu conhecimento</li>
+            <li>Considere aumentar a dificuldade dos próximos desafios</li>
+          </ul>
+        </div>
+
+        <!-- Botões de Ação -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px;">
+          <button 
+            class="btn btn-secondary"
+            style="padding: 14px 24px; font-size: 15px; width: 100%;"
+            onclick="window.location.href='home.html'"
+          >
+            Voltar ao Painel
+          </button>
+          <button 
+            class="btn btn-primary"
+            style="padding: 14px 24px; font-size: 15px; width: 100%;"
+            onclick="window.location.href='questions.html'"
+          >
+            Refazer Desafio
+          </button>
         </div>
       </main>
-
-      <!-- RIGHT RAIL -->
-      <aside class="right-rail" id="right-rail" style="display:none"></aside>
     </div>
   </div>
 

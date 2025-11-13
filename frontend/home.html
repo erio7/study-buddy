@@ -4,10 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>StudyBuddy - Meu Painel</title>
-
+  <meta name="description" content="Gerencie seus estudos de forma eficiente com o StudyBuddy">
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -16,7 +17,6 @@
     <div class="board">
       <!-- SIDEBAR (hotbar) -->
       <aside class="hotbar" aria-label="Navegação lateral">
-        <!-- Marca no topo da hotbar -->
         <a href="home.html" class="hotbar-brand" aria-label="Study Buddy - Home">
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M4 5a2 2 0 0 1 2-2h9a3 3 0 0 1 3 3v12a1 1 0 0 1-1.45.9L12 16.76 5.45 18.9A1 1 0 0 1 4 18V5z"/>
@@ -26,7 +26,7 @@
 
         <div class="hotbar-title">Navegação</div>
 
-        <a href="home.html" class="hotbar-link active">
+        <a href="home.html" class="hotbar-link active" aria-current="page">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"/></svg>
           <span>Home</span>
         </a>
@@ -37,10 +37,9 @@
         </a>
 
         <a href="create-challenge.html" class="hotbar-link">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
           <span>Criar Desafio</span>
         </a>
-
 
         <a href="challenge-detail.html" class="hotbar-link">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
@@ -61,7 +60,6 @@
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><polyline points="20 6 9 17 4 12"></polyline></svg>
           <span>Resultados</span>
         </a>
-
       </aside>
 
       <!-- CONTEÚDO CENTRAL -->
@@ -70,13 +68,112 @@
 
         <div class="dashboard-grid">
           <section class="card">
-            <h3>Desafio de química</h3>
-            <p>Participantes e ranking dinâmico aqui...</p>
+            <h3>📚 Desafio de Química</h3>
+            <p style="color: var(--color-text-secondary); margin-top: 12px;">
+              Continue seu progresso no desafio atual. Você está indo muito bem!
+            </p>
+            <div style="margin-top: 20px;">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                <span style="font-size: 14px; color: var(--color-text-secondary);">Progresso</span>
+                <span style="font-size: 14px; font-weight: 600;">75%</span>
+              </div>
+              <div style="background: rgba(255,255,255,.05); height: 8px; border-radius: 4px; overflow: hidden;">
+                <div style="background: linear-gradient(90deg, var(--color-primary), var(--color-primary-hover)); height: 100%; width: 75%; border-radius: 4px;"></div>
+              </div>
+            </div>
+            <a href="challenge-detail.html" class="btn btn-primary" style="margin-top: 20px; width: 100%; text-align: center; display: block;">
+              Ver Detalhes
+            </a>
           </section>
 
           <section class="card">
-            <h3>Progresso</h3>
-            <p>Coloque aqui outro conteúdo do painel (ex.: últimos estudos, metas, etc.).</p>
+            <h3>📊 Progresso Semanal</h3>
+            <p style="color: var(--color-text-secondary); margin-top: 12px;">
+              Você estudou <strong style="color: var(--color-primary);">12 horas</strong> esta semana!
+            </p>
+            <div style="margin-top: 20px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                <span style="font-size: 14px;">Segunda</span>
+                <div style="flex: 1; margin: 0 12px; background: rgba(255,255,255,.05); height: 6px; border-radius: 3px; overflow: hidden;">
+                  <div style="background: var(--color-primary); height: 100%; width: 80%;"></div>
+                </div>
+                <span style="font-size: 13px; color: var(--color-text-secondary);">2h</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                <span style="font-size: 14px;">Terça</span>
+                <div style="flex: 1; margin: 0 12px; background: rgba(255,255,255,.05); height: 6px; border-radius: 3px; overflow: hidden;">
+                  <div style="background: var(--color-primary); height: 100%; width: 60%;"></div>
+                </div>
+                <span style="font-size: 13px; color: var(--color-text-secondary);">1.5h</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-size: 14px;">Quarta</span>
+                <div style="flex: 1; margin: 0 12px; background: rgba(255,255,255,.05); height: 6px; border-radius: 3px; overflow: hidden;">
+                  <div style="background: var(--color-primary); height: 100%; width: 100%;"></div>
+                </div>
+                <span style="font-size: 13px; color: var(--color-text-secondary);">2.5h</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="card">
+            <h3>🎯 Metas do Mês</h3>
+            <div style="margin-top: 16px;">
+              <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+                <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-primary-light); display: flex; align-items: center; justify-content: center; font-size: 18px;">
+                  ✅
+                </div>
+                <div style="flex: 1;">
+                  <div style="font-size: 15px; font-weight: 600; margin-bottom: 4px;">Estudar 40 horas</div>
+                  <div style="font-size: 13px; color: var(--color-text-secondary);">32/40 horas completas</div>
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+                <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-primary-light); display: flex; align-items: center; justify-content: center; font-size: 18px;">
+                  📝
+                </div>
+                <div style="flex: 1;">
+                  <div style="font-size: 15px; font-weight: 600; margin-bottom: 4px;">Completar 5 desafios</div>
+                  <div style="font-size: 13px; color: var(--color-text-secondary);">3/5 desafios completos</div>
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-primary-light); display: flex; align-items: center; justify-content: center; font-size: 18px;">
+                  🔥
+                </div>
+                <div style="flex: 1;">
+                  <div style="font-size: 15px; font-weight: 600; margin-bottom: 4px;">Manter streak de 15 dias</div>
+                  <div style="font-size: 13px; color: var(--color-text-secondary);">12/15 dias consecutivos</div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="card">
+            <h3>📖 Últimos Resumos</h3>
+            <div style="margin-top: 16px;">
+              <div style="padding: 12px; background: var(--color-surface-inset); border-radius: var(--radius-medium); margin-bottom: 12px; border: 1px solid rgba(255,255,255,.04);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                  <span style="font-weight: 600; font-size: 15px;">Química Orgânica</span>
+                  <span style="font-size: 12px; color: var(--color-text-secondary);">Hoje</span>
+                </div>
+                <p style="font-size: 14px; color: var(--color-text-secondary); margin: 0;">
+                  Estudei grupos funcionais e nomenclatura IUPAC...
+                </p>
+              </div>
+              <div style="padding: 12px; background: var(--color-surface-inset); border-radius: var(--radius-medium); margin-bottom: 12px; border: 1px solid rgba(255,255,255,.04);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                  <span style="font-weight: 600; font-size: 15px;">Física Quântica</span>
+                  <span style="font-size: 12px; color: var(--color-text-secondary);">Ontem</span>
+                </div>
+                <p style="font-size: 14px; color: var(--color-text-secondary); margin: 0;">
+                  Revisão de mecânica quântica e princípios...
+                </p>
+              </div>
+            </div>
+            <a href="resumo.html" class="btn btn-secondary" style="margin-top: 8px; width: 100%; text-align: center; display: block;">
+              Adicionar Resumo
+            </a>
           </section>
         </div>
       </main>
@@ -85,110 +182,28 @@
       <aside class="right-rail">
         <section class="rail-card">
           <div class="rail-header">
-            <div class="streak-pill" title="Seu streak">
+            <div class="streak-pill" title="Seu streak de estudos consecutivos">
               <span class="flame">🔥</span>
               <span id="streak-count">12</span>
             </div>
-            <a href="profile.html" class="rail-avatar" title="Ir para perfil">
-              <img src="https://i.pravatar.cc/64?img=12" alt="Foto do perfil">
+            <a href="profile.html" class="rail-avatar" title="Ir para perfil" aria-label="Ver perfil">
+              <img src="https://i.pravatar.cc/88?img=12" alt="Foto do perfil" loading="lazy">
             </a>
           </div>
 
           <div class="calendar-header">
-            <button id="prev-month" aria-label="Mês anterior">&#10094;</button>
-            <h4 id="calendar-title"></h4>
-            <button id="next-month" aria-label="Próximo mês">&#10095;</button>
+            <button id="prev-month" aria-label="Mês anterior" type="button">&#10094;</button>
+            <h4 id="calendar-title">Novembro 2025</h4>
+            <button id="next-month" aria-label="Próximo mês" type="button">&#10095;</button>
           </div>
 
-          <div class="calendar" id="calendar"></div>
+          <div class="calendar" id="calendar" role="grid" aria-label="Calendário de estudos"></div>
         </section>
       </aside>
     </div>
   </div>
 
-  <!-- SCRIPT: calendário navegável com dias opacos do mês anterior/seguinte -->
-  <script>
-    const calendarEl = document.getElementById('calendar');
-    const titleEl = document.getElementById('calendar-title');
-    const prevBtn = document.getElementById('prev-month');
-    const nextBtn = document.getElementById('next-month');
-
-    const monthNames = [
-      'Janeiro','Fevereiro','Março','Abril','Maio','Junho',
-      'Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'
-    ];
-
-    let current = new Date();
-
-    function renderCalendar(date) {
-      calendarEl.innerHTML = '';
-      const year = date.getFullYear();
-      const month = date.getMonth();
-      titleEl.textContent = `${monthNames[month]} ${year}`;
-
-      const today = new Date();
-
-      // Cabeçalhos
-      const headers = ['S','T','Q','Q','S','S','D'];
-      headers.forEach(h => {
-        const head = document.createElement('div');
-        head.className = 'head';
-        head.textContent = h;
-        calendarEl.appendChild(head);
-      });
-
-      // Dias do mês anterior
-      const firstDay = new Date(year, month, 1);
-      const daysInPrevMonth = new Date(year, month, 0).getDate();
-      const offset = (firstDay.getDay() + 6) % 7; // segunda = 0
-
-      for (let i = offset; i > 0; i--) {
-        const d = document.createElement('div');
-        d.className = 'day faded';
-        d.textContent = daysInPrevMonth - i + 1;
-        calendarEl.appendChild(d);
-      }
-
-      // Dias do mês atual
-      const daysInMonth = new Date(year, month + 1, 0).getDate();
-      for (let day = 1; day <= daysInMonth; day++) {
-        const d = document.createElement('div');
-        d.className = 'day';
-        d.textContent = day;
-
-        if (day === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
-          d.classList.add('current');
-        }
-
-        calendarEl.appendChild(d);
-      }
-
-      // Dias do próximo mês para completar a grade
-      const totalCells = calendarEl.children.length;
-      const remainder = totalCells % 7;
-      if (remainder !== 0) {
-        const nextDays = 7 - remainder;
-        for (let i = 1; i <= nextDays; i++) {
-          const d = document.createElement('div');
-          d.className = 'day faded';
-          d.textContent = i;
-          calendarEl.appendChild(d);
-        }
-      }
-    }
-
-    prevBtn.addEventListener('click', () => {
-      current.setMonth(current.getMonth() - 1);
-      renderCalendar(current);
-    });
-
-    nextBtn.addEventListener('click', () => {
-      current.setMonth(current.getMonth() + 1);
-      renderCalendar(current);
-    });
-
-    renderCalendar(current);
-  </script>
+  <script src="js/calendar.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

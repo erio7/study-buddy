@@ -1,56 +1,232 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StudyBuddy - Criar Desafio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>StudyBuddy - Criar Desafio</title>
+  <meta name="description" content="Crie um novo desafio de estudo">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <main class="page-container">
-        
-        <a href="home.html" class="btn-home">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-            <span>Home</span>
+
+  <div class="page-shell">
+    <div class="board">
+      <!-- SIDEBAR (hotbar) -->
+      <aside class="hotbar" aria-label="Navegação lateral">
+        <a href="home.html" class="hotbar-brand" aria-label="Study Buddy - Home">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 5a2 2 0 0 1 2-2h9a3 3 0 0 1 3 3v12a1 1 0 0 1-1.45.9L12 16.76 5.45 18.9A1 1 0 0 1 4 18V5z"/>
+          </svg>
+          <span>Study Buddy</span>
         </a>
 
-        <h1>Crie seu desafio</h1>
-        <div class="page-content">
-            <form class="challenge-form">
-                <div class="form-layout">
-                    
-                    <div class="form-group">
-                        <label for="challenge-name">Nome do desafio</label>
-                        <input type="text" id="challenge-name" placeholder="Ex: Desafio de Python">
-                        
-                        <label for="challenge-subject">Matéria</label>
-                        <input type="text" id="challenge-subject" placeholder="Ex: Python, Matemática...">
-                        
-                        <label for="challenge-time">Tempo de estudo (dia)</label>
-                        <input type="text" id="challenge-time" placeholder="Ex: 2 horas">
-                    </div>
-                    
-                    <div class="form-upload">
-                        <div class="photo-upload-area">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
-                            <span>Foto do desafio</span>
-                        </div>
-                        <button type="button" class="btn btn-primary">Convide seus amigos</button>
-                        <a href="challenge-detail.html" class="btn btn-secondary">Ver Desafio</a>
-                    </div>
-                </div>
-            </form>
+        <div class="hotbar-title">Navegação</div>
+
+        <a href="home.html" class="hotbar-link">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span>Home</span>
+        </a>
+
+        <a href="profile.html" class="hotbar-link">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          <span>Perfil</span>
+        </a>
+
+        <a href="create-challenge.html" class="hotbar-link active" aria-current="page">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+          <span>Criar Desafio</span>
+        </a>
+
+        <a href="challenge-detail.html" class="hotbar-link">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          <span>Desafio</span>
+        </a>
+
+        <a href="resumo.html" class="hotbar-link">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22h11A2.5 2.5 0 0 0 20 19.5V6a2 2 0 0 0-2-2h-3.5L12 2 9.5 4H6a2 2 0 0 0-2 2z"/></svg>
+          <span>Resumo</span>
+        </a>
+
+        <a href="questions.html" class="hotbar-link">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 1 1 5.82 1c0 2-3 2-3 4"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+          <span>Perguntas</span>
+        </a>
+
+        <a href="results.html" class="hotbar-link">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <span>Resultados</span>
+        </a>
+      </aside>
+
+      <!-- CONTEÚDO CENTRAL -->
+      <main class="content">
+        <div style="margin-bottom: 32px;">
+          <h1>Criar Novo Desafio</h1>
+          <p style="color: var(--color-text-secondary); font-size: 16px; margin: 0;">
+            Configure um novo desafio de estudo e comece a acompanhar seu progresso
+          </p>
         </div>
-    </main>
 
-    <footer class="app-navbar">
-        <a href="create-challenge.html" class="nav-item active"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-            <span>Criar</span>
-        </a>
-        </footer>
+        <div class="card" style="max-width: 800px;">
+          <form id="challenge-form" style="display: flex; flex-direction: column; gap: 28px;">
+            
+            <!-- Nome do Desafio -->
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              <label for="challenge-name" style="font-weight: 700; font-size: 15px;">
+                Nome do Desafio
+              </label>
+              <input 
+                type="text" 
+                id="challenge-name" 
+                name="challenge-name"
+                placeholder="Ex: Desafio de Química Orgânica"
+                required
+                style="padding: 14px 16px; font-size: 15px;"
+              />
+              <p style="font-size: 13px; color: var(--color-text-secondary); margin: 0;">
+                Escolha um nome descritivo para seu desafio
+              </p>
+            </div>
+
+            <!-- Matéria -->
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              <label for="subject" style="font-weight: 700; font-size: 15px;">
+                Matéria / Disciplina
+              </label>
+              <input 
+                type="text" 
+                id="subject" 
+                name="subject"
+                placeholder="Ex: Química, Matemática, Programação..."
+                required
+                style="padding: 14px 16px; font-size: 15px;"
+              />
+              <p style="font-size: 13px; color: var(--color-text-secondary); margin: 0;">
+                Qual é a matéria principal deste desafio?
+              </p>
+            </div>
+
+            <!-- Descrição -->
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              <label for="description" style="font-weight: 700; font-size: 15px;">
+                Descrição (Opcional)
+              </label>
+              <textarea 
+                id="description" 
+                name="description"
+                placeholder="Descreva os objetivos e tópicos que serão abordados neste desafio..."
+                style="padding: 14px 16px; font-size: 15px; min-height: 120px; resize: vertical;"
+              ></textarea>
+              <p style="font-size: 13px; color: var(--color-text-secondary); margin: 0;">
+                Adicione detalhes sobre o que será estudado
+              </p>
+            </div>
+
+            <!-- Tempo Estimado -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+              <div style="display: flex; flex-direction: column; gap: 12px;">
+                <label for="daily-time" style="font-weight: 700; font-size: 15px;">
+                  Tempo Diário Estimado
+                </label>
+                <input 
+                  type="number" 
+                  id="daily-time" 
+                  name="daily-time"
+                  placeholder="Ex: 2"
+                  min="1"
+                  max="24"
+                  required
+                  style="padding: 14px 16px; font-size: 15px;"
+                />
+                <p style="font-size: 13px; color: var(--color-text-secondary); margin: 0;">
+                  Horas por dia
+                </p>
+              </div>
+
+              <div style="display: flex; flex-direction: column; gap: 12px;">
+                <label for="duration" style="font-weight: 700; font-size: 15px;">
+                  Duração Total
+                </label>
+                <input 
+                  type="number" 
+                  id="duration" 
+                  name="duration"
+                  placeholder="Ex: 30"
+                  min="1"
+                  max="365"
+                  required
+                  style="padding: 14px 16px; font-size: 15px;"
+                />
+                <p style="font-size: 13px; color: var(--color-text-secondary); margin: 0;">
+                  Dias
+                </p>
+              </div>
+            </div>
+
+            <!-- Upload de Foto -->
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              <label for="challenge-photo" style="font-weight: 700; font-size: 15px;">
+                Foto do Desafio (Opcional)
+              </label>
+              <div class="upload-area" style="padding: 48px 32px;">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 48px; height: 48px; margin: 0 auto 16px; color: var(--color-text-secondary);">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <p style="font-size: 15px; color: var(--color-text-primary); margin: 0 0 8px; font-weight: 600;">
+                  Clique ou arraste uma imagem
+                </p>
+                <p style="font-size: 13px; color: var(--color-text-secondary); margin: 0;">
+                  PNG, JPG ou JPEG até 5MB
+                </p>
+                <input 
+                  type="file" 
+                  id="challenge-photo" 
+                  name="challenge-photo"
+                  accept="image/*"
+                  style="display: none;"
+                />
+              </div>
+            </div>
+
+            <!-- Botões de Ação -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px;">
+              <button 
+                type="reset" 
+                class="btn btn-secondary"
+                style="padding: 14px 24px; font-size: 15px; width: 100%;"
+              >
+                Limpar Formulário
+              </button>
+              <button 
+                type="submit" 
+                class="btn btn-primary"
+                style="padding: 14px 24px; font-size: 15px; width: 100%;"
+              >
+                Criar Desafio
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Dica de Boas Práticas -->
+        <div style="margin-top: 32px; padding: 24px; background: var(--color-primary-light); border-radius: var(--radius-medium); border: 1px solid rgba(139, 92, 246, 0.3);">
+          <h3 style="color: var(--color-primary); margin-top: 0;">💡 Dica: Como Criar um Bom Desafio</h3>
+          <ul style="color: var(--color-text-secondary); margin: 12px 0 0; padding-left: 20px; line-height: 1.8;">
+            <li>Escolha um tema específico e bem definido</li>
+            <li>Defina objetivos claros e mensuráveis</li>
+            <li>Seja realista com o tempo estimado</li>
+            <li>Adicione uma foto para melhor visualização</li>
+            <li>Comece com desafios menores e aumente a dificuldade</li>
+          </ul>
+        </div>
+      </main>
+    </div>
+  </div>
+
   <script src="js/app.js"></script>
 </body>
 </html>

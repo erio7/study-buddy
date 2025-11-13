@@ -4,86 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>StudyBuddy - Perguntas</title>
-
-  <!-- Fontes (igual às outras páginas) -->
+  <meta name="description" content="Responda perguntas do seu desafio">
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <!-- Estilos globais -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
-
-  <!-- Estilo específico embutido da página QUESTIONS -->
-  <style>
-    /* =========================
-       QUESTIONS PAGE
-       ========================= */
-    .question-enunciado {
-      font-size: 18px;
-      font-weight: 500;
-      color: var(--color-text-primary);
-      margin-bottom: 12px;
-    }
-
-    .question-form {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      margin-top: 8px;
-    }
-
-    .question-form label {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: #1f1f27;
-      padding: 8px 10px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background .2s ease;
-    }
-
-    .question-form label:hover {
-      background: #2b2b35;
-    }
-
-    .question-form input[type="radio"] {
-      accent-color: var(--color-primary);
-      width: 16px;
-      height: 16px;
-      cursor: pointer;
-    }
-
-    .submit-area {
-      margin-top: 24px;
-      display: flex;
-      justify-content: flex-end;
-    }
-
-    .btn-primary {
-      background: var(--color-primary);
-      border: none;
-      padding: 12px 20px;
-      color: #fff;
-      font-weight: 600;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: background .2s ease;
-    }
-
-    .btn-primary:hover {
-      background: #7c3aed;
-    }
-
-    @media (max-width: 768px) {
-      .question-enunciado {
-        font-size: 16px;
-      }
-      .btn-primary {
-        width: 100%;
-      }
-    }
-  </style>
 </head>
 <body>
 
@@ -111,10 +37,9 @@
         </a>
 
         <a href="create-challenge.html" class="hotbar-link">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
           <span>Criar Desafio</span>
         </a>
-
 
         <a href="challenge-detail.html" class="hotbar-link">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
@@ -126,7 +51,7 @@
           <span>Resumo</span>
         </a>
 
-        <a href="questions.html" class="hotbar-link active">
+        <a href="questions.html" class="hotbar-link active" aria-current="page">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 1 1 5.82 1c0 2-3 2-3 4"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
           <span>Perguntas</span>
         </a>
@@ -135,32 +60,231 @@
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><polyline points="20 6 9 17 4 12"></polyline></svg>
           <span>Resultados</span>
         </a>
-
       </aside>
 
-      <!-- CONTEÚDO (coluna central) -->
-      <main class="content" role="main">
-        <h1 id="page-title"></h1>
+      <!-- CONTEÚDO CENTRAL -->
+      <main class="content">
+        <div style="margin-bottom: 32px;">
+          <h1>Desafio de Química Orgânica</h1>
+          <p style="color: var(--color-text-secondary); font-size: 16px; margin: 0;">
+            Responda as perguntas para consolidar seu aprendizado
+          </p>
+        </div>
 
-        <!-- Cartão com a pergunta atual -->
-        <section class="card" id="question-card" data-question-id="">
-          <div id="question-enunciado" class="question-enunciado"></div>
-
-          <form id="question-form" class="question-form" data-question-type="">
-            <!-- conteúdo das alternativas será carregado dinamicamente -->
-          </form>
-
-          <div class="submit-area">
-            <button id="btn-submit" class="btn-primary" type="button">Enviar respostas</button>
+        <!-- Barra de Progresso -->
+        <div class="card" style="margin-bottom: 24px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <h3 style="margin: 0;">Progresso: 3 de 5</h3>
+            <span style="font-size: 14px; color: var(--color-text-secondary);">60%</span>
           </div>
-        </section>
+          <div style="background: rgba(255,255,255,.05); height: 10px; border-radius: 5px; overflow: hidden;">
+            <div style="background: linear-gradient(90deg, var(--color-primary), var(--color-primary-hover)); height: 100%; width: 60%; border-radius: 5px; box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);"></div>
+          </div>
+        </div>
 
-        <!-- Paginação de questões (opcional) -->
-        <div id="question-pagination" class="card" style="display:none"></div>
+        <!-- Formulário de Perguntas -->
+        <form id="questions-form" style="display: flex; flex-direction: column; gap: 32px;">
+          
+          <!-- Pergunta 1 -->
+          <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 20px;">
+              <div>
+                <h3 style="margin: 0 0 8px;">Pergunta 1</h3>
+                <p style="color: var(--color-text-secondary); margin: 0; font-size: 14px;">Múltipla escolha</p>
+              </div>
+              <span style="background: var(--color-primary-light); color: var(--color-primary); padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">
+                ✅ Respondida
+              </span>
+            </div>
+
+            <p style="font-size: 16px; font-weight: 600; margin-bottom: 20px; line-height: 1.6;">
+              Qual é o grupo funcional característico de um álcool?
+            </p>
+
+            <div class="question-options">
+              <label class="option-label">
+                <input type="radio" name="q1" value="a" checked />
+                <span>Hidroxila (-OH)</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q1" value="b" />
+                <span>Carboxila (-COOH)</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q1" value="c" />
+                <span>Carbonila (C=O)</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q1" value="d" />
+                <span>Amina (-NH2)</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Pergunta 2 -->
+          <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 20px;">
+              <div>
+                <h3 style="margin: 0 0 8px;">Pergunta 2</h3>
+                <p style="color: var(--color-text-secondary); margin: 0; font-size: 14px;">Múltipla escolha</p>
+              </div>
+              <span style="background: var(--color-primary-light); color: var(--color-primary); padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">
+                ✅ Respondida
+              </span>
+            </div>
+
+            <p style="font-size: 16px; font-weight: 600; margin-bottom: 20px; line-height: 1.6;">
+              Qual é a diferença entre um aldeído e uma cetona?
+            </p>
+
+            <div class="question-options">
+              <label class="option-label">
+                <input type="radio" name="q2" value="a" checked />
+                <span>Posição do grupo carbonila na cadeia carbônica</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q2" value="b" />
+                <span>Número de átomos de carbono</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q2" value="c" />
+                <span>Solubilidade em água</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q2" value="d" />
+                <span>Ponto de ebulição</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Pergunta 3 -->
+          <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 20px;">
+              <div>
+                <h3 style="margin: 0 0 8px;">Pergunta 3</h3>
+                <p style="color: var(--color-text-secondary); margin: 0; font-size: 14px;">Múltipla escolha</p>
+              </div>
+              <span style="background: var(--color-primary-light); color: var(--color-primary); padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">
+                ✅ Respondida
+              </span>
+            </div>
+
+            <p style="font-size: 16px; font-weight: 600; margin-bottom: 20px; line-height: 1.6;">
+              Qual é o nome IUPAC do composto CH3-CH2-OH?
+            </p>
+
+            <div class="question-options">
+              <label class="option-label">
+                <input type="radio" name="q3" value="a" checked />
+                <span>Etanol</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q3" value="b" />
+                <span>Metanol</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q3" value="c" />
+                <span>Propanol</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q3" value="d" />
+                <span>Butanol</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Pergunta 4 (Não respondida) -->
+          <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 20px;">
+              <div>
+                <h3 style="margin: 0 0 8px;">Pergunta 4</h3>
+                <p style="color: var(--color-text-secondary); margin: 0; font-size: 14px;">Múltipla escolha</p>
+              </div>
+              <span style="background: rgba(255,255,255,.1); color: var(--color-text-secondary); padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">
+                ⏳ Pendente
+              </span>
+            </div>
+
+            <p style="font-size: 16px; font-weight: 600; margin-bottom: 20px; line-height: 1.6;">
+              O que é uma reação de esterificação?
+            </p>
+
+            <div class="question-options">
+              <label class="option-label">
+                <input type="radio" name="q4" value="a" />
+                <span>Reação entre um álcool e um ácido carboxílico</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q4" value="b" />
+                <span>Reação de oxidação de um álcool</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q4" value="c" />
+                <span>Reação de redução de um aldeído</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q4" value="d" />
+                <span>Reação de condensação de dois álcoois</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Pergunta 5 (Não respondida) -->
+          <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 20px;">
+              <div>
+                <h3 style="margin: 0 0 8px;">Pergunta 5</h3>
+                <p style="color: var(--color-text-secondary); margin: 0; font-size: 14px;">Múltipla escolha</p>
+              </div>
+              <span style="background: rgba(255,255,255,.1); color: var(--color-text-secondary); padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">
+                ⏳ Pendente
+              </span>
+            </div>
+
+            <p style="font-size: 16px; font-weight: 600; margin-bottom: 20px; line-height: 1.6;">
+              Qual é a fórmula geral de um éter?
+            </p>
+
+            <div class="question-options">
+              <label class="option-label">
+                <input type="radio" name="q5" value="a" />
+                <span>R-O-R'</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q5" value="b" />
+                <span>R-OH</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q5" value="c" />
+                <span>R-COOH</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q5" value="d" />
+                <span>R-NH2</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Botões de Ação -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px;">
+            <button 
+              type="button" 
+              class="btn btn-secondary"
+              style="padding: 14px 24px; font-size: 15px; width: 100%;"
+              onclick="window.history.back()"
+            >
+              Voltar
+            </button>
+            <button 
+              type="submit" 
+              class="btn btn-primary"
+              style="padding: 14px 24px; font-size: 15px; width: 100%;"
+            >
+              Enviar Respostas
+            </button>
+          </div>
+        </form>
       </main>
-
-      <!-- RIGHT RAIL (opcional) -->
-      <aside class="right-rail" id="right-rail" style="display:none"></aside>
     </div>
   </div>
 
