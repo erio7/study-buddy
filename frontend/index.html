@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>StudyBuddy - Revolucione Seu Aprendizado</title>
+  <meta name="description" content="StudyBuddy é a plataforma completa para organizar, acompanhar e potencializar seus estudos com desafios, cronômetro e análise de progresso.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --color-primary: #8b5cf6;
+      --color-primary-hover: #7c3aed;
+      --color-primary-light: rgba(139, 92, 246, 0.1);
+      --color-background: #0f0f1e;
+      --color-surface: #1a1a2e;
+      --color-surface-inset: #16213e;
+      --color-text-primary: #ffffff;
+      --color-text-secondary: #a0aec0;
+      --color-border: rgba(255, 255, 255, 0.1);
+      --color-success: #22c55e;
+      --color-error: #ef4444;
+      --radius-small: 8px;
+      --radius-medium: 12px;
+      --radius-large: 16px;
+      --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--color-background);
+      color: var(--color-text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Header/Navbar */
+    header {
+      background: rgba(15, 15, 30, 0.8);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--color-border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .navbar {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 16px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 24px;
+      font-weight: 800;
+      text-decoration: none;
+      color: var(--color-text-primary);
+      transition: all var(--transition-normal);
+    }
+
+    .logo:hover {
+      color: var(--color-primary);
+    }
+
+    .logo svg {
+      width: 32px;
+      height: 32px;
+      color: var(--color-primary);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all var(--transition-normal);
+    }
+
+    .nav-links a:hover {
+      color: var(--color-primary);
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 16px;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      border-radius: var(--radius-medium);
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      border: none;
+      transition: all var(--transition-normal);
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover));
+      color: white;
+      box-shadow: 0 8px 24px rgba(139, 92, 246, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(139, 92, 246, 0.4);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--color-text-primary);
+      border: 2px solid var(--color-primary);
+    }
+
+    .btn-secondary:hover {
+      background: var(--color-primary-light);
+    }
+
+    /* Hero Section */
+    .hero {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 80px 32px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero-content h1 {
+      font-size: 56px;
+      font-weight: 800;
+      margin-bottom: 24px;
+      line-height: 1.2;
+      background: linear-gradient(135deg, var(--color-primary), #a78bfa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-content p {
+      font-size: 18px;
+      color: var(--color-text-secondary);
+      margin-bottom: 32px;
+      line-height: 1.8;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    .hero-features {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .feature-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .feature-item svg {
+      width: 24px;
+      height: 24px;
+      color: var(--color-primary);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .feature-item p {
+      font-size: 15px;
+      color: var(--color-text-secondary);
+      margin: 0;
+    }
+
+    .hero-visual {
+      position: relative;
+      height: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-visual-bg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 30% 50%, rgba(139, 92, 246, 0.15), transparent 50%);
+      border-radius: var(--radius-large);
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+
+    .hero-visual-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+    }
+
+    .hero-visual-content svg {
+      width: 200px;
+      height: 200px;
+      margin-bottom: 24px;
+      filter: drop-shadow(0 0 40px rgba(139, 92, 246, 0.3));
+    }
+
+    .hero-visual-content p {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--color-primary);
+    }
+
+    /* Features Section */
+    .features {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 80px 32px;
+      background: linear-gradient(180deg, transparent, rgba(139, 92, 246, 0.05));
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-title h2 {
+      font-size: 48px;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .section-title p {
+      font-size: 18px;
+      color: var(--color-text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+    }
+
+    .feature-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-large);
+      padding: 40px 32px;
+      text-align: center;
+      transition: all var(--transition-normal);
+    }
+
+    .feature-card:hover {
+      border-color: var(--color-primary);
+      background: rgba(139, 92, 246, 0.05);
+      transform: translateY(-8px);
+    }
+
+    .feature-card-icon {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    .feature-card h3 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .feature-card p {
+      color: var(--color-text-secondary);
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    /* Stats Section */
+    .stats {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 80px 32px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 32px;
+    }
+
+    .stat-box {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-large);
+      padding: 40px 32px;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 48px;
+      font-weight: 800;
+      color: var(--color-primary);
+      margin-bottom: 12px;
+    }
+
+    .stat-label {
+      font-size: 16px;
+      color: var(--color-text-secondary);
+      font-weight: 600;
+    }
+
+    /* CTA Section */
+    .cta {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 80px 32px;
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(124, 58, 237, 0.05));
+      border-radius: var(--radius-large);
+      border: 1px solid var(--color-border);
+      text-align: center;
+    }
+
+    .cta h2 {
+      font-size: 42px;
+      font-weight: 800;
+      margin-bottom: 24px;
+    }
+
+    .cta p {
+      font-size: 18px;
+      color: var(--color-text-secondary);
+      margin-bottom: 40px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-border);
+      padding: 60px 32px 40px;
+      margin-top: 80px;
+    }
+
+    .footer-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-section h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .footer-section ul {
+      list-style: none;
+    }
+
+    .footer-section ul li {
+      margin-bottom: 12px;
+    }
+
+    .footer-section a {
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      transition: all var(--transition-normal);
+    }
+
+    .footer-section a:hover {
+      color: var(--color-primary);
+    }
+
+    .footer-bottom {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding-top: 40px;
+      border-top: 1px solid var(--color-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--color-text-secondary);
+      font-size: 14px;
+    }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 16px 20px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 60px 20px;
+      }
+
+      .hero-content h1 {
+        font-size: 36px;
+      }
+
+      .hero-visual {
+        height: 300px;
+      }
+
+      .section-title h2 {
+        font-size: 32px;
+      }
+
+      .features {
+        padding: 60px 20px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header/Navbar -->
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="logo">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M4 5a2 2 0 0 1 2-2h9a3 3 0 0 1 3 3v12a1 1 0 0 1-1.45.9L12 16.76 5.45 18.9A1 1 0 0 1 4 18V5z"/>
+        </svg>
+        StudyBuddy
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#features">Recursos</a></li>
+        <li><a href="#stats">Resultados</a></li>
+        <li><a href="#cta">Começar</a></li>
+      </ul>
+
+      <div class="nav-buttons">
+        <a href="login.html" class="btn btn-secondary">Login</a>
+        <a href="login.html" class="btn btn-primary">Registrar</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Revolucione Seu Aprendizado</h1>
+      <p>StudyBuddy é a plataforma completa para organizar, acompanhar e potencializar seus estudos com desafios interativos, cronômetro inteligente e análise detalhada de progresso.</p>
+
+      <div class="hero-buttons">
+        <a href="login.html" class="btn btn-primary">Começar Agora</a>
+        <a href="#features" class="btn btn-secondary">Saiba Mais</a>
+      </div>
+
+      <div class="hero-features">
+        <div class="feature-item">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          <p><strong>Desafios Personalizados:</strong> Crie e customize desafios para qualquer matéria</p>
+        </div>
+        <div class="feature-item">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          <p><strong>Acompanhamento em Tempo Real:</strong> Veja seu progresso dia a dia</p>
+        </div>
+        <div class="feature-item">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          <p><strong>Análise Detalhada:</strong> Entenda seu desempenho com gráficos e estatísticas</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-visual-bg"></div>
+      <div class="hero-visual-content">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path d="M12 6.253v13m0-13C6.5 6.253 2 10.753 2 16.253s4.5 10 10 10 10-4.5 10-10-4.5-10-10-10z"></path>
+        </svg>
+        <p>Comece seu Streak Hoje</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features" id="features">
+    <div class="section-title">
+      <h2>Recursos Poderosos</h2>
+      <p>Tudo que você precisa para estudar de forma eficiente e organizada</p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-card-icon">📚</div>
+        <h3>Desafios Estruturados</h3>
+        <p>Organize seus estudos em desafios com duração, objetivos e métricas claras. Acompanhe cada etapa do seu aprendizado.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-card-icon">⏱️</div>
+        <h3>Cronômetro Inteligente</h3>
+        <p>Registre o tempo de estudo com precisão. Entenda quanto tempo você dedica a cada matéria e otimize sua rotina.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-card-icon">📝</div>
+        <h3>Resumo Diário</h3>
+        <p>Documente o que aprendeu cada dia com anotações, fotos e reflexões. Crie um histórico completo do seu progresso.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-card-icon">❓</div>
+        <h3>Sistema de Perguntas</h3>
+        <p>Teste seus conhecimentos com perguntas de múltipla escolha. Avalie seu aprendizado e identifique pontos fracos.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-card-icon">📊</div>
+        <h3>Análise de Resultados</h3>
+        <p>Visualize seu desempenho com análises detalhadas. Veja taxa de acerto, tempo médio e progresso ao longo do tempo.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-card-icon">🔥</div>
+        <h3>Streak Counter</h3>
+        <p>Mantenha sua sequência de dias estudados. Visualize seu streak no calendário e se motive a continuar consistente.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats" id="stats">
+    <div class="section-title">
+      <h2>Resultados Comprovados</h2>
+      <p>Milhares de estudantes já transformaram sua forma de aprender</p>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-box">
+        <div class="stat-number">15K+</div>
+        <div class="stat-label">Usuários Ativos</div>
+      </div>
+
+      <div class="stat-box">
+        <div class="stat-number">500K+</div>
+        <div class="stat-label">Horas de Estudo</div>
+      </div>
+
+      <div class="stat-box">
+        <div class="stat-number">92%</div>
+        <div class="stat-label">Taxa de Satisfação</div>
+      </div>
+
+      <div class="stat-box">
+        <div class="stat-number">10K+</div>
+        <div class="stat-label">Desafios Criados</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta" id="cta">
+    <h2>Pronto para Revolucionar Seu Aprendizado?</h2>
+    <p>Junte-se a milhares de estudantes que já estão transformando sua forma de estudar com StudyBuddy</p>
+    <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+      <a href="login.html" class="btn btn-primary" style="padding: 14px 32px; font-size: 16px;">
+        Começar Gratuitamente
+      </a>
+      <a href="#features" class="btn btn-secondary" style="padding: 14px 32px; font-size: 16px;">
+        Explorar Recursos
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>StudyBuddy</h3>
+        <p style="color: var(--color-text-secondary); font-size: 14px; line-height: 1.8;">
+          A plataforma completa para revolucionar seu aprendizado com desafios, cronômetro e análise de progresso.
+        </p>
+      </div>
+
+      <div class="footer-section">
+        <h3>Produto</h3>
+        <ul>
+          <li><a href="#features">Recursos</a></li>
+          <li><a href="#stats">Resultados</a></li>
+          <li><a href="login.html">Começar</a></li>
+          <li><a href="#">Preços</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>Empresa</h3>
+        <ul>
+          <li><a href="#">Sobre Nós</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Carreiras</a></li>
+          <li><a href="#">Contato</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>Legal</h3>
+        <ul>
+          <li><a href="#">Privacidade</a></li>
+          <li><a href="#">Termos de Uso</a></li>
+          <li><a href="#">Cookies</a></li>
+          <li><a href="#">Segurança</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2025 StudyBuddy. Todos os direitos reservados.</p>
+      <div style="display: flex; gap: 20px;">
+        <a href="#" style="color: var(--color-text-secondary); text-decoration: none;">Twitter</a>
+        <a href="#" style="color: var(--color-text-secondary); text-decoration: none;">LinkedIn</a>
+        <a href="#" style="color: var(--color-text-secondary); text-decoration: none;">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
