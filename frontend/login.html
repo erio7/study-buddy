@@ -224,13 +224,18 @@
       box-shadow: 0 8px 24px rgba(139, 92, 246, 0.3);
     }
 
-    .btn-primary:hover {
+    .btn-primary:hover:not(:disabled) {
       transform: translateY(-2px);
       box-shadow: 0 12px 32px rgba(139, 92, 246, 0.4);
     }
 
-    .btn-primary:active {
+    .btn-primary:active:not(:disabled) {
       transform: translateY(0);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
     }
 
     .btn-secondary {
@@ -340,6 +345,23 @@
       animation: slideDown 0.3s ease;
     }
 
+    /* Success Message */
+    .success-message {
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      color: #22c55e;
+      padding: 12px 16px;
+      border-radius: var(--radius-medium);
+      font-size: 14px;
+      margin-bottom: 24px;
+      display: none;
+    }
+
+    .success-message.show {
+      display: block;
+      animation: slideDown 0.3s ease;
+    }
+
     @keyframes slideDown {
       from {
         opacity: 0;
@@ -349,6 +371,22 @@
         opacity: 1;
         transform: translateY(0);
       }
+    }
+
+    /* Loading spinner */
+    .loading-spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-right: 8px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
     }
 
     /* Responsive */
@@ -391,13 +429,18 @@
 
     <!-- Card -->
     <div class="card">
+      <!-- Success Message -->
+      <div class="success-message" id="success-message">
+        ✓ Login realizado com sucesso! Redirecionando...
+      </div>
+
       <!-- Error Message -->
       <div class="error-message" id="error-message">
         Email ou senha incorretos. Tente novamente.
       </div>
 
       <!-- Login Form -->
-      <form id="login-form" onsubmit="handleLogin(event)">
+      <form id="login-form">
         <!-- Email -->
         <div class="form-group">
           <label for="email">Email</label>
@@ -430,7 +473,7 @@
         </div>
 
         <!-- Submit Button -->
-        <button type="submit" class="btn btn-primary">
+        <button type="submit" class="btn btn-primary" id="submit-btn">
           Fazer Login
         </button>
       </form>
@@ -473,39 +516,130 @@
     </div>
   </div>
 
+  <!-- Script da API -->
+  <script src="js/api.js"></script>
+
+  <!-- Script de Login Integrado -->
   <script>
-    function handleLogin(event) {
-      event.preventDefault();
-      
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-      const errorMessage = document.getElementById('error-message');
-      
-      // Validação simples (substituir com chamada de API real)
-      if (email && password) {
-        // Simular sucesso
-        console.log('Login com:', email);
-        
-        // Redirecionar para home.html após 500ms
-        setTimeout(() => {
-          window.location.href = 'home.html';
-        }, 500);
+    /**
+     * Integração do formulário de login com o backend
+     */
+
+    const loginForm = document.getElementById('login-form');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const submitBtn = document.getElementById('submit-btn');
+    const errorMessage = document.getElementById('error-message');
+    const successMessage = document.getElementById('success-message');
+
+    /**
+     * Limpar mensagens de erro/sucesso
+     */
+    function clearMessages() {
+      errorMessage.classList.remove('show');
+      successMessage.classList.remove('show');
+    }
+
+    /**
+     * Mostrar mensagem de erro
+     */
+    function showError(message) {
+      errorMessage.textContent = message;
+      errorMessage.classList.add('show');
+      setTimeout(() => {
+        errorMessage.classList.remove('show');
+      }, 5000);
+    }
+
+    /**
+     * Mostrar mensagem de sucesso
+     */
+    function showSuccess(message) {
+      successMessage.textContent = message;
+      successMessage.classList.add('show');
+    }
+
+    /**
+     * Desabilitar/Habilitar botão
+     */
+    function setButtonLoading(isLoading) {
+      submitBtn.disabled = isLoading;
+      if (isLoading) {
+        submitBtn.innerHTML = '<span class="loading-spinner"></span>Entrando...';
       } else {
-        errorMessage.classList.add('show');
-        setTimeout(() => {
-          errorMessage.classList.remove('show');
-        }, 3000);
+        submitBtn.textContent = 'Fazer Login';
       }
     }
 
-    // Remover erro ao digitar
-    document.getElementById('email').addEventListener('input', () => {
-      document.getElementById('error-message').classList.remove('show');
+    /**
+     * Lidar com o envio do formulário
+     */
+    loginForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const email = emailInput.value.trim();
+      const password = passwordInput.value;
+
+      // Validação básica
+      if (!email || !password) {
+        showError('Por favor, preencha todos os campos');
+        return;
+      }
+
+      // Limpar mensagens anteriores
+      clearMessages();
+
+      // Desabilitar botão e mostrar loading
+      setButtonLoading(true);
+
+      try {
+        // Chamar a API de login
+        const response = await api.login(email, password);
+
+        if (response && response.access_token) {
+          // Login bem-sucedido
+          showSuccess('✓ Login realizado com sucesso! Redirecionando...');
+
+          // Armazenar token (já feito no api.js, mas deixando explícito)
+          localStorage.setItem('authToken', response.access_token);
+
+          // Redirecionar após 1.5 segundos
+          setTimeout(() => {
+            window.location.href = '/home.html';
+          }, 1500);
+        }
+      } catch (error) {
+        // Erro no login
+        console.error('Erro ao fazer login:', error);
+        
+        // Mostrar mensagem de erro apropriada
+        if (error.message.includes('401') || error.message.includes('Unauthorized')) {
+          showError('Email ou senha incorretos. Tente novamente.');
+        } else if (error.message.includes('network')) {
+          showError('Erro de conexão. Verifique se o backend está rodando.');
+        } else {
+          showError(error.message || 'Erro ao fazer login. Tente novamente.');
+        }
+
+        // Habilitar botão novamente
+        setButtonLoading(false);
+      }
     });
 
-    document.getElementById('password').addEventListener('input', () => {
-      document.getElementById('error-message').classList.remove('show');
-    });
+    /**
+     * Limpar erro ao digitar
+     */
+    emailInput.addEventListener('input', clearMessages);
+    passwordInput.addEventListener('input', clearMessages);
+
+    /**
+     * Verificar se já está logado (redirecionar para home)
+     */
+    if (api.isAuthenticated()) {
+      window.location.href = '/home.html';
+    }
+
+    console.log('✓ Login integrado com sucesso!');
   </script>
 
 </body>
