@@ -10,13 +10,39 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 def hash_password(password: str) -> str:
     """Cria um hash da senha"""
-    if len(password) > 72:
-        raise ValueError('Senha não pode ter mais de 72 caracteres')
+    if not password or len(password) < 6:
+        raise ValueError('Senha deve ter pelo menos 6 caracteres')
+    
+    # Truncar a senha para 72 bytes (limite do bcrypt)
+    # Isso evita erros do bcrypt
+    password_bytes = password.encode('utf-8')
+    if len(password_bytes) > 72:
+        # Truncar de forma segura, removendo bytes do final
+        password_bytes = password_bytes[:72]
+        # Tentar decodificar, se falhar, remover mais bytes
+        while password_bytes:
+            try:
+                password = password_bytes.decode('utf-8')
+                break
+            except UnicodeDecodeError:
+                password_bytes = password_bytes[:-1]
+    
     return pwd_context.hash(password)
 
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
     """Verifica se a senha corresponde ao hash"""
+    # Aplicar o mesmo truncamento ao verificar
+    password_bytes = plain_password.encode('utf-8')
+    if len(password_bytes) > 72:
+        password_bytes = password_bytes[:72]
+        while password_bytes:
+            try:
+                plain_password = password_bytes.decode('utf-8')
+                break
+            except UnicodeDecodeError:
+                password_bytes = password_bytes[:-1]
+    
     return pwd_context.verify(plain_password, hashed_password)
 
 
