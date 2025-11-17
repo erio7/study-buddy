@@ -3,229 +3,401 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>StudyBuddy - Visualizar Dia</title>
-  <meta name="description" content="Visualize o conteúdo do dia selecionado">
+  <title>StudyBuddy - Registrar Dia</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  
   <style>
-    @keyframes slideInUp {
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --color-primary: #8b5cf6;
+      --color-primary-hover: #7c3aed;
+      --color-background: #0f0f1e;
+      --color-surface: #1a1a2e;
+      --color-surface-inset: #16213e;
+      --color-text-primary: #ffffff;
+      --color-text-secondary: #a0aec0;
+      --color-border: rgba(255, 255, 255, 0.1);
+      --color-error: #ef4444;
+      --color-success: #22c55e;
+      --radius-medium: 12px;
+      --radius-large: 16px;
+      --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, var(--color-background) 0%, #1a1a3e 100%);
+      color: var(--color-text-primary);
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .header {
+      margin-bottom: 40px;
+    }
+
+    .header h1 {
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .header p {
+      color: var(--color-text-secondary);
+      font-size: 15px;
+    }
+
+    .card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-large);
+      padding: 40px;
+      backdrop-filter: blur(10px);
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 10px;
+      color: var(--color-text-primary);
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 12px 16px;
+      background: var(--color-surface-inset);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-medium);
+      color: var(--color-text-primary);
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      transition: all var(--transition-normal);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      background: rgba(139, 92, 246, 0.05);
+      box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+    }
+
+    .btn {
+      width: 100%;
+      padding: 14px 24px;
+      border-radius: var(--radius-medium);
+      font-weight: 600;
+      font-size: 15px;
+      cursor: pointer;
+      border: none;
+      transition: all var(--transition-normal);
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover));
+      color: white;
+      box-shadow: 0 8px 24px rgba(139, 92, 246, 0.3);
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(139, 92, 246, 0.4);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    .error-message {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #ef4444;
+      padding: 12px 16px;
+      border-radius: var(--radius-medium);
+      font-size: 14px;
+      margin-bottom: 24px;
+      display: none;
+    }
+
+    .error-message.show {
+      display: block;
+      animation: slideDown 0.3s ease;
+    }
+
+    .success-message {
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      color: #22c55e;
+      padding: 12px 16px;
+      border-radius: var(--radius-medium);
+      font-size: 14px;
+      margin-bottom: 24px;
+      display: none;
+    }
+
+    .success-message.show {
+      display: block;
+      animation: slideDown 0.3s ease;
+    }
+
+    @keyframes slideDown {
       from {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(-10px);
       }
       to {
         opacity: 1;
         transform: translateY(0);
       }
     }
-    
-    .day-view-container {
-      animation: slideInUp 0.4s ease;
+
+    .loading-spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-right: 8px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        padding: 24px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
 
-  <div class="page-shell">
-    <div class="board">
-      <!-- SIDEBAR (hotbar) -->
-      <aside class="hotbar" aria-label="Navegação lateral">
-        <a href="home.html" class="hotbar-brand" aria-label="Study Buddy - Home">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M4 5a2 2 0 0 1 2-2h9a3 3 0 0 1 3 3v12a1 1 0 0 1-1.45.9L12 16.76 5.45 18.9A1 1 0 0 1 4 18V5z"/>
-          </svg>
-          <span>Study Buddy</span>
-        </a>
+  <div class="container">
+    <div class="header">
+      <h1>Registrar Dia de Estudo</h1>
+      <p>Registre seu progresso de hoje</p>
+    </div>
 
-        <div class="hotbar-title">Navegação</div>
+    <div class="card">
+      <div class="success-message" id="success-message">
+        ✓ Resumo registrado com sucesso!
+      </div>
 
-        <a href="home.html" class="hotbar-link">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          <span>Home</span>
-        </a>
+      <div class="error-message" id="error-message">
+        Erro ao registrar resumo. Tente novamente.
+      </div>
 
-        <a href="profile.html" class="hotbar-link">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-          <span>Perfil</span>
-        </a>
+      <form id="summary-form">
+        <div class="form-group">
+          <label for="date">Data</label>
+          <input 
+            type="date" 
+            id="date" 
+            name="date"
+            required
+          />
+        </div>
 
-        <a href="create-challenge.html" class="hotbar-link">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
-          <span>Criar Desafio</span>
-        </a>
-
-        <a href="challenge-detail.html" class="hotbar-link">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-          <span>Desafio</span>
-        </a>
-
-        <a href="resumo.html" class="hotbar-link">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22h11A2.5 2.5 0 0 0 20 19.5V6a2 2 0 0 0-2-2h-3.5L12 2 9.5 4H6a2 2 0 0 0-2 2z"/></svg>
-          <span>Resumo</span>
-        </a>
-
-        <a href="questions.html" class="hotbar-link">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 1 1 5.82 1c0 2-3 2-3 4"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-          <span>Perguntas</span>
-        </a>
-
-        <a href="results.html" class="hotbar-link">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <span>Resultados</span>
-        </a>
-      </aside>
-
-      <!-- CONTEÚDO CENTRAL -->
-      <main class="content">
-        <div class="day-view-container">
-          <!-- Cabeçalho com Data -->
-          <div style="margin-bottom: 32px; display: flex; justify-content: space-between; align-items: start;">
-            <div>
-              <h1 id="day-title" style="margin-bottom: 8px;">13 de Novembro, 2025</h1>
-              <p style="color: var(--color-text-secondary); font-size: 16px; margin: 0;">
-                Quinta-feira
-              </p>
-            </div>
-            <button 
-              onclick="window.history.back()"
-              style="background: var(--color-surface-inset); border: 1px solid rgba(255,255,255,.1); color: var(--color-text-primary); padding: 10px 16px; border-radius: var(--radius-medium); cursor: pointer; font-weight: 600; transition: all var(--transition-normal);"
-              onmouseover="this.style.borderColor='var(--color-primary)'; this.style.background='var(--color-primary-light)'"
-              onmouseout="this.style.borderColor='rgba(255,255,255,.1)'; this.style.background='var(--color-surface-inset)'"
-            >
-              ← Voltar
-            </button>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="study-hours">Horas de Estudo</label>
+            <input 
+              type="number" 
+              id="study-hours" 
+              name="study-hours"
+              placeholder="2.5"
+              min="0.5"
+              max="12"
+              step="0.5"
+              required
+            />
           </div>
 
-          <!-- Resumo do Dia -->
-          <div class="card" style="margin-bottom: 24px;">
-            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 16px;">
-              <h3 style="margin: 0;">Resumo do Dia</h3>
-              <span style="background: var(--color-primary-light); color: var(--color-primary); padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">
-                ✅ Completado
-              </span>
-            </div>
-
-            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 20px;">
-              <div style="padding: 16px; background: var(--color-surface-inset); border-radius: var(--radius-medium); border: 1px solid rgba(255,255,255,.04);">
-                <p style="color: var(--color-text-secondary); font-size: 13px; margin: 0 0 8px;">Tempo de Estudo</p>
-                <p style="font-size: 24px; font-weight: 700; margin: 0; color: var(--color-primary);">2h 30m</p>
-              </div>
-              <div style="padding: 16px; background: var(--color-surface-inset); border-radius: var(--radius-medium); border: 1px solid rgba(255,255,255,.04);">
-                <p style="color: var(--color-text-secondary); font-size: 13px; margin: 0 0 8px;">Matéria</p>
-                <p style="font-size: 18px; font-weight: 700; margin: 0;">Química Orgânica</p>
-              </div>
-              <div style="padding: 16px; background: var(--color-surface-inset); border-radius: var(--radius-medium); border: 1px solid rgba(255,255,255,.04);">
-                <p style="color: var(--color-text-secondary); font-size: 13px; margin: 0 0 8px;">Dificuldade</p>
-                <p style="font-size: 18px; font-weight: 700; margin: 0;">Médio</p>
-              </div>
-            </div>
-
-            <div style="padding: 16px; background: var(--color-surface-inset); border-radius: var(--radius-medium); border: 1px solid rgba(255,255,255,.04);">
-              <p style="color: var(--color-text-secondary); font-size: 14px; margin: 0 0 12px; font-weight: 600;">Resumo do Estudo</p>
-              <p style="color: var(--color-text-primary); line-height: 1.8; margin: 0;">
-                Estudei grupos funcionais em química orgânica, focando em álcoois, aldeídos e cetonas. Aprendi sobre nomenclatura IUPAC e as diferenças estruturais entre esses compostos. Realizei exercícios práticos de identificação e nomeação de moléculas. Esclareci dúvidas sobre reações de oxidação e redução. Preparei um resumo com exemplos e estruturas químicas.
-              </p>
-            </div>
-          </div>
-
-          <!-- Foto do Dia (se houver) -->
-          <div class="card" style="margin-bottom: 24px;">
-            <h3 style="margin-top: 0;">Foto do Estudo</h3>
-            <div style="background: var(--color-surface-inset); border-radius: var(--radius-medium); padding: 32px; text-align: center; border: 2px dashed rgba(139, 92, 246, 0.3);">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 48px; height: 48px; margin: 0 auto 16px; color: var(--color-text-secondary);">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-              <p style="color: var(--color-text-secondary); margin: 0;">Nenhuma foto anexada para este dia</p>
-            </div>
-          </div>
-
-          <!-- Objetivos Alcançados -->
-          <div class="card" style="margin-bottom: 24px;">
-            <h3 style="margin-top: 0;">Objetivos Alcançados</h3>
-            <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 16px;">
-              <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: var(--color-surface-inset); border-radius: var(--radius-medium); border: 1px solid rgba(34, 197, 94, 0.3);">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 20px; height: 20px; color: #22c55e; flex-shrink: 0;">
-                  <polyline points="20 6 9 17 4 12"></polyline>
-                </svg>
-                <span style="color: var(--color-text-primary);">Entendi os conceitos principais</span>
-              </div>
-              <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: var(--color-surface-inset); border-radius: var(--radius-medium); border: 1px solid rgba(34, 197, 94, 0.3);">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 20px; height: 20px; color: #22c55e; flex-shrink: 0;">
-                  <polyline points="20 6 9 17 4 12"></polyline>
-                </svg>
-                <span style="color: var(--color-text-primary);">Resolvi exercícios práticos</span>
-              </div>
-              <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: var(--color-surface-inset); border-radius: var(--radius-medium); border: 1px solid rgba(34, 197, 94, 0.3);">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 20px; height: 20px; color: #22c55e; flex-shrink: 0;">
-                  <polyline points="20 6 9 17 4 12"></polyline>
-                </svg>
-                <span style="color: var(--color-text-primary);">Esclareci minhas dúvidas</span>
-              </div>
-              <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: var(--color-surface-inset); border-radius: var(--radius-medium); border: 1px solid rgba(34, 197, 94, 0.3);">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 20px; height: 20px; color: #22c55e; flex-shrink: 0;">
-                  <polyline points="20 6 9 17 4 12"></polyline>
-                </svg>
-                <span style="color: var(--color-text-primary);">Preparei resumo/anotações</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Ações Rápidas -->
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-            <button 
-              class="btn btn-secondary"
-              style="padding: 14px 24px; font-size: 15px; width: 100%;"
-              onclick="window.history.back()"
-            >
-              Voltar ao Calendário
-            </button>
-            <button 
-              class="btn btn-primary"
-              style="padding: 14px 24px; font-size: 15px; width: 100%;"
-              onclick="window.location.href='resumo.html'"
-            >
-              Editar Resumo
-            </button>
+          <div class="form-group">
+            <label for="difficulty">Dificuldade</label>
+            <select id="difficulty" name="difficulty" required>
+              <option value="">Selecione...</option>
+              <option value="Fácil">Fácil</option>
+              <option value="Médio">Médio</option>
+              <option value="Difícil">Difícil</option>
+            </select>
           </div>
         </div>
-      </main>
+
+        <div class="form-group">
+          <label for="summary">Resumo do Estudo</label>
+          <textarea 
+            id="summary" 
+            name="summary"
+            placeholder="O que você aprendeu hoje? Quais foram os principais pontos?"
+            required
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="objectives">Objetivos Alcançados</label>
+          <textarea 
+            id="objectives" 
+            name="objectives"
+            placeholder="Liste os objetivos que você alcançou..."
+          ></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="submit-btn">
+          Registrar Resumo
+        </button>
+      </form>
     </div>
   </div>
 
+  <script src="js/api.js"></script>
   <script>
-    // Script para obter a data da URL e atualizar a página
-    (function() {
-      'use strict';
+    // Verificar autenticação
+    if (!api.isAuthenticated()) {
+      window.location.href = '/login.html';
+    }
 
-      // Obter parâmetro da URL
-      const urlParams = new URLSearchParams(window.location.search);
-      const dateParam = urlParams.get('date');
+    const summaryForm = document.getElementById('summary-form');
+    const dateInput = document.getElementById('date');
+    const studyHoursInput = document.getElementById('study-hours');
+    const difficultyInput = document.getElementById('difficulty');
+    const summaryInput = document.getElementById('summary');
+    const objectivesInput = document.getElementById('objectives');
+    const submitBtn = document.getElementById('submit-btn');
+    const errorMessage = document.getElementById('error-message');
+    const successMessage = document.getElementById('success-message');
 
-      if (dateParam) {
-        try {
-          const date = new Date(dateParam + 'T00:00:00');
-          const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-          const formattedDate = date.toLocaleDateString('pt-BR', options);
-          
-          // Capitalizar primeira letra
-          const capitalizedDate = formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
-          
-          document.getElementById('day-title').textContent = capitalizedDate;
-        } catch (e) {
-          console.error('Erro ao processar data:', e);
+    // Definir data de hoje como padrão
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.value = today;
+
+    // Obter challenge_id da URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const challengeId = urlParams.get('challenge_id');
+
+    if (!challengeId) {
+      errorMessage.textContent = 'Desafio não especificado';
+      errorMessage.classList.add('show');
+    }
+
+    function clearMessages() {
+      errorMessage.classList.remove('show');
+      successMessage.classList.remove('show');
+    }
+
+    function showError(message) {
+      errorMessage.textContent = message;
+      errorMessage.classList.add('show');
+      setTimeout(() => {
+        errorMessage.classList.remove('show');
+      }, 5000);
+    }
+
+    function showSuccess(message) {
+      successMessage.textContent = message;
+      successMessage.classList.add('show');
+    }
+
+    function setButtonLoading(isLoading) {
+      submitBtn.disabled = isLoading;
+      if (isLoading) {
+        submitBtn.innerHTML = '<span class="loading-spinner"></span>Registrando...';
+      } else {
+        submitBtn.textContent = 'Registrar Resumo';
+      }
+    }
+
+    summaryForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const date = dateInput.value;
+      const studyHours = parseFloat(studyHoursInput.value);
+      const difficulty = difficultyInput.value;
+      const summary = summaryInput.value.trim();
+      const objectives = objectivesInput.value.trim();
+
+      if (!date || !studyHours || !difficulty || !summary) {
+        showError('Por favor, preencha todos os campos obrigatórios');
+        return;
+      }
+
+      if (studyHours < 0.5 || studyHours > 12) {
+        showError('As horas de estudo devem estar entre 0.5 e 12');
+        return;
+      }
+
+      clearMessages();
+      setButtonLoading(true);
+
+      try {
+        const response = await api.createSummary(
+          challengeId,
+          date,
+          studyHours,
+          difficulty,
+          summary,
+          objectives
+        );
+
+        if (response && response.id) {
+          showSuccess('✓ Resumo registrado com sucesso!');
+
+          setTimeout(() => {
+            window.location.href = '/home.html';
+          }, 1500);
         }
+      } catch (error) {
+        console.error('Erro ao registrar resumo:', error);
+        showError(error.message || 'Erro ao registrar resumo. Tente novamente.');
+        setButtonLoading(false);
       }
+    });
 
-      // Animação de entrada
-      const container = document.querySelector('.day-view-container');
-      if (container) {
-        container.style.animation = 'slideInUp 0.4s ease';
-      }
-    })();
+    dateInput.addEventListener('input', clearMessages);
+    studyHoursInput.addEventListener('input', clearMessages);
+    difficultyInput.addEventListener('input', clearMessages);
+    summaryInput.addEventListener('input', clearMessages);
+    objectivesInput.addEventListener('input', clearMessages);
+
+    console.log('✓ Day view integrada com sucesso!');
   </script>
-  <script src="js/app.js"></script>
+
 </body>
 </html>

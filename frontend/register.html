@@ -29,7 +29,6 @@
       --color-border: rgba(255, 255, 255, 0.1);
       --color-error: #ef4444;
       --color-success: #22c55e;
-      --color-warning: #f59e0b;
       --radius-medium: 12px;
       --radius-large: 16px;
       --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -46,7 +45,6 @@
       padding: 20px;
     }
 
-    /* Background Animation */
     .bg-animation {
       position: fixed;
       top: 0;
@@ -88,14 +86,12 @@
       66% { transform: translate(-20px, 20px); }
     }
 
-    /* Container */
     .container {
       width: 100%;
       max-width: 480px;
       z-index: 1;
     }
 
-    /* Logo */
     .logo-section {
       text-align: center;
       margin-bottom: 40px;
@@ -129,7 +125,6 @@
       font-size: 15px;
     }
 
-    /* Card */
     .card {
       background: var(--color-surface);
       border: 1px solid var(--color-border);
@@ -138,9 +133,8 @@
       backdrop-filter: blur(10px);
     }
 
-    /* Form */
     .form-group {
-      margin-bottom: 20px;
+      margin-bottom: 24px;
     }
 
     label {
@@ -174,87 +168,6 @@
       box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
     }
 
-    /* Password Strength Indicator */
-    .password-strength {
-      display: flex;
-      gap: 4px;
-      margin-top: 8px;
-    }
-
-    .strength-bar {
-      flex: 1;
-      height: 4px;
-      background: var(--color-surface-inset);
-      border-radius: 2px;
-      transition: all var(--transition-normal);
-    }
-
-    .strength-bar.weak {
-      background: var(--color-error);
-    }
-
-    .strength-bar.medium {
-      background: var(--color-warning);
-    }
-
-    .strength-bar.strong {
-      background: var(--color-success);
-    }
-
-    .strength-text {
-      font-size: 12px;
-      margin-top: 6px;
-      color: var(--color-text-secondary);
-    }
-
-    .strength-text.weak {
-      color: var(--color-error);
-    }
-
-    .strength-text.medium {
-      color: var(--color-warning);
-    }
-
-    .strength-text.strong {
-      color: var(--color-success);
-    }
-
-    /* Checkbox */
-    .checkbox-group {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-
-    input[type="checkbox"] {
-      width: 20px;
-      height: 20px;
-      cursor: pointer;
-      accent-color: var(--color-primary);
-      margin-top: 2px;
-      flex-shrink: 0;
-    }
-
-    .checkbox-group label {
-      margin: 0;
-      font-weight: 500;
-      font-size: 13px;
-      cursor: pointer;
-      line-height: 1.5;
-    }
-
-    .checkbox-group a {
-      color: var(--color-primary);
-      text-decoration: none;
-      transition: all var(--transition-normal);
-    }
-
-    .checkbox-group a:hover {
-      text-decoration: underline;
-    }
-
-    /* Buttons */
     .btn {
       width: 100%;
       padding: 14px 24px;
@@ -273,85 +186,78 @@
       box-shadow: 0 8px 24px rgba(139, 92, 246, 0.3);
     }
 
-    .btn-primary:hover {
+    .btn-primary:hover:not(:disabled) {
       transform: translateY(-2px);
       box-shadow: 0 12px 32px rgba(139, 92, 246, 0.4);
     }
 
-    .btn-primary:active {
-      transform: translateY(0);
+    .btn-primary:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
     }
 
-    .btn-secondary {
-      background: var(--color-surface-inset);
-      color: var(--color-text-primary);
-      border: 1px solid var(--color-border);
-    }
-
-    .btn-secondary:hover {
-      border-color: var(--color-primary);
-      background: rgba(139, 92, 246, 0.05);
-    }
-
-    /* Divider */
-    .divider {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin: 28px 0;
-    }
-
-    .divider::before,
-    .divider::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--color-border);
-    }
-
-    .divider span {
-      color: var(--color-text-secondary);
-      font-size: 13px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    /* Social Buttons */
-    .social-buttons {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 20px;
-    }
-
-    .social-btn {
+    .error-message {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #ef4444;
       padding: 12px 16px;
-      background: var(--color-surface-inset);
-      border: 1px solid var(--color-border);
       border-radius: var(--radius-medium);
-      color: var(--color-text-primary);
-      font-weight: 600;
       font-size: 14px;
-      cursor: pointer;
-      transition: all var(--transition-normal);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      font-family: 'Poppins', sans-serif;
+      margin-bottom: 24px;
+      display: none;
     }
 
-    .social-btn:hover {
-      border-color: var(--color-primary);
-      background: rgba(139, 92, 246, 0.05);
+    .error-message.show {
+      display: block;
+      animation: slideDown 0.3s ease;
     }
 
-    /* Footer */
+    .success-message {
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      color: #22c55e;
+      padding: 12px 16px;
+      border-radius: var(--radius-medium);
+      font-size: 14px;
+      margin-bottom: 24px;
+      display: none;
+    }
+
+    .success-message.show {
+      display: block;
+      animation: slideDown 0.3s ease;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .loading-spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-right: 8px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
     .auth-footer {
       text-align: center;
-      margin-top: 20px;
-      padding-top: 20px;
+      margin-top: 24px;
+      padding-top: 24px;
       border-top: 1px solid var(--color-border);
     }
 
@@ -372,52 +278,6 @@
       text-decoration: underline;
     }
 
-    /* Error Message */
-    .error-message {
-      background: rgba(239, 68, 68, 0.1);
-      border: 1px solid rgba(239, 68, 68, 0.3);
-      color: #ef4444;
-      padding: 12px 16px;
-      border-radius: var(--radius-medium);
-      font-size: 14px;
-      margin-bottom: 20px;
-      display: none;
-    }
-
-    .error-message.show {
-      display: block;
-      animation: slideDown 0.3s ease;
-    }
-
-    /* Success Message */
-    .success-message {
-      background: rgba(34, 197, 94, 0.1);
-      border: 1px solid rgba(34, 197, 94, 0.3);
-      color: var(--color-success);
-      padding: 12px 16px;
-      border-radius: var(--radius-medium);
-      font-size: 14px;
-      margin-bottom: 20px;
-      display: none;
-    }
-
-    .success-message.show {
-      display: block;
-      animation: slideDown 0.3s ease;
-    }
-
-    @keyframes slideDown {
-      from {
-        opacity: 0;
-        transform: translateY(-10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* Responsive */
     @media (max-width: 480px) {
       .card {
         padding: 32px 24px;
@@ -426,24 +286,17 @@
       .logo-section h1 {
         font-size: 24px;
       }
-
-      .social-buttons {
-        grid-template-columns: 1fr;
-      }
     }
   </style>
 </head>
 <body>
 
-  <!-- Background Animation -->
   <div class="bg-animation">
     <div class="bg-blob blob-1"></div>
     <div class="bg-blob blob-2"></div>
   </div>
 
-  <!-- Container -->
   <div class="container">
-    <!-- Logo Section -->
     <div class="logo-section">
       <a href="index.html" class="logo">
         <svg viewBox="0 0 24 24" fill="currentColor">
@@ -451,33 +304,31 @@
         </svg>
         StudyBuddy
       </a>
-      <h1>Crie Sua Conta</h1>
-      <p>Comece sua jornada de aprendizado hoje</p>
+      <h1>Criar Conta</h1>
+      <p>Comece sua jornada de estudos agora</p>
     </div>
 
-    <!-- Card -->
     <div class="card">
-      <!-- Error Message -->
-      <div class="error-message" id="error-message"></div>
+      <div class="success-message" id="success-message">
+        ✓ Conta criada com sucesso! Redirecionando...
+      </div>
 
-      <!-- Success Message -->
-      <div class="success-message" id="success-message"></div>
+      <div class="error-message" id="error-message">
+        Erro ao criar conta. Tente novamente.
+      </div>
 
-      <!-- Register Form -->
-      <form id="register-form" onsubmit="handleRegister(event)">
-        <!-- Full Name -->
+      <form id="register-form">
         <div class="form-group">
-          <label for="fullname">Nome Completo</label>
+          <label for="username">Nome de Usuário</label>
           <input 
             type="text" 
-            id="fullname" 
-            name="fullname"
-            placeholder="João Pedro Silva"
+            id="username" 
+            name="username"
+            placeholder="seu_usuario"
             required
           />
         </div>
 
-        <!-- Email -->
         <div class="form-group">
           <label for="email">Email</label>
           <input 
@@ -489,7 +340,6 @@
           />
         </div>
 
-        <!-- Password -->
         <div class="form-group">
           <label for="password">Senha</label>
           <input 
@@ -498,81 +348,30 @@
             name="password"
             placeholder="Crie uma senha forte"
             required
-            onchange="checkPasswordStrength()"
           />
-          <div class="password-strength">
-            <div class="strength-bar" id="strength-1"></div>
-            <div class="strength-bar" id="strength-2"></div>
-            <div class="strength-bar" id="strength-3"></div>
-          </div>
-          <div class="strength-text" id="strength-text">Força da senha: Fraca</div>
         </div>
 
-        <!-- Confirm Password -->
         <div class="form-group">
-          <label for="confirm-password">Confirmar Senha</label>
+          <label for="password-confirm">Confirmar Senha</label>
           <input 
             type="password" 
-            id="confirm-password" 
-            name="confirm-password"
+            id="password-confirm" 
+            name="password-confirm"
             placeholder="Confirme sua senha"
             required
           />
         </div>
 
-        <!-- Terms & Privacy -->
-        <div class="checkbox-group">
-          <input type="checkbox" id="terms" name="terms" required />
-          <label for="terms">
-            Concordo com os <a href="#">Termos de Uso</a> e <a href="#">Política de Privacidade</a>
-          </label>
-        </div>
-
-        <!-- Newsletter -->
-        <div class="checkbox-group">
-          <input type="checkbox" id="newsletter" name="newsletter" />
-          <label for="newsletter">
-            Desejo receber dicas e atualizações sobre StudyBuddy
-          </label>
-        </div>
-
-        <!-- Submit Button -->
-        <button type="submit" class="btn btn-primary">
+        <button type="submit" class="btn btn-primary" id="submit-btn">
           Criar Conta
         </button>
       </form>
 
-      <!-- Divider -->
-      <div class="divider">
-        <span>Ou registre-se com</span>
-      </div>
-
-      <!-- Social Buttons -->
-      <div class="social-buttons">
-        <button type="button" class="social-btn">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-          </svg>
-          Google
-        </button>
-        <button type="button" class="social-btn">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-          </svg>
-          GitHub
-        </button>
-      </div>
-
-      <!-- Footer -->
       <div class="auth-footer">
         <p>Já tem uma conta? <a href="login.html">Faça login aqui</a></p>
       </div>
     </div>
 
-    <!-- Back to Home -->
     <div style="text-align: center; margin-top: 24px;">
       <a href="index.html" style="color: var(--color-text-secondary); text-decoration: none; font-size: 14px; transition: all var(--transition-normal);" onmouseover="this.style.color='var(--color-primary)'" onmouseout="this.style.color='var(--color-text-secondary)'">
         ← Voltar à página inicial
@@ -580,126 +379,106 @@
     </div>
   </div>
 
+  <script src="js/api.js"></script>
   <script>
-    // Verificar força da senha
-    function checkPasswordStrength() {
-      const password = document.getElementById('password').value;
-      const strength1 = document.getElementById('strength-1');
-      const strength2 = document.getElementById('strength-2');
-      const strength3 = document.getElementById('strength-3');
-      const strengthText = document.getElementById('strength-text');
+    const registerForm = document.getElementById('register-form');
+    const usernameInput = document.getElementById('username');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const passwordConfirmInput = document.getElementById('password-confirm');
+    const submitBtn = document.getElementById('submit-btn');
+    const errorMessage = document.getElementById('error-message');
+    const successMessage = document.getElementById('success-message');
 
-      // Remover todas as classes
-      strength1.classList.remove('weak', 'medium', 'strong');
-      strength2.classList.remove('weak', 'medium', 'strong');
-      strength3.classList.remove('weak', 'medium', 'strong');
-      strengthText.classList.remove('weak', 'medium', 'strong');
-
-      if (password.length === 0) {
-        strengthText.textContent = 'Força da senha: -';
-        return;
-      }
-
-      let strength = 0;
-
-      // Verificar comprimento
-      if (password.length >= 8) strength++;
-      if (password.length >= 12) strength++;
-
-      // Verificar tipos de caracteres
-      if (/[a-z]/.test(password) && /[A-Z]/.test(password)) strength++;
-      if (/[0-9]/.test(password)) strength++;
-      if (/[^a-zA-Z0-9]/.test(password)) strength++;
-
-      // Definir força
-      if (strength <= 2) {
-        strength1.classList.add('weak');
-        strengthText.classList.add('weak');
-        strengthText.textContent = 'Força da senha: Fraca';
-      } else if (strength <= 3) {
-        strength1.classList.add('medium');
-        strength2.classList.add('medium');
-        strengthText.classList.add('medium');
-        strengthText.textContent = 'Força da senha: Média';
-      } else {
-        strength1.classList.add('strong');
-        strength2.classList.add('strong');
-        strength3.classList.add('strong');
-        strengthText.classList.add('strong');
-        strengthText.textContent = 'Força da senha: Forte';
-      }
-    }
-
-    // Monitorar mudanças na senha
-    document.getElementById('password').addEventListener('input', checkPasswordStrength);
-
-    // Remover mensagens ao digitar
-    document.getElementById('fullname').addEventListener('input', () => {
-      document.getElementById('error-message').classList.remove('show');
-    });
-
-    document.getElementById('email').addEventListener('input', () => {
-      document.getElementById('error-message').classList.remove('show');
-    });
-
-    document.getElementById('password').addEventListener('input', () => {
-      document.getElementById('error-message').classList.remove('show');
-    });
-
-    document.getElementById('confirm-password').addEventListener('input', () => {
-      document.getElementById('error-message').classList.remove('show');
-    });
-
-    // Validar e enviar formulário
-    function handleRegister(event) {
-      event.preventDefault();
-
-      const fullname = document.getElementById('fullname').value;
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-      const confirmPassword = document.getElementById('confirm-password').value;
-      const terms = document.getElementById('terms').checked;
-      const errorMessage = document.getElementById('error-message');
-      const successMessage = document.getElementById('success-message');
-
-      // Limpar mensagens
+    function clearMessages() {
       errorMessage.classList.remove('show');
       successMessage.classList.remove('show');
-
-      // Validações
-      if (!fullname || !email || !password || !confirmPassword) {
-        errorMessage.textContent = 'Por favor, preencha todos os campos obrigatórios.';
-        errorMessage.classList.add('show');
-        return;
-      }
-
-      if (password.length < 8) {
-        errorMessage.textContent = 'A senha deve ter no mínimo 8 caracteres.';
-        errorMessage.classList.add('show');
-        return;
-      }
-
-      if (password !== confirmPassword) {
-        errorMessage.textContent = 'As senhas não coincidem.';
-        errorMessage.classList.add('show');
-        return;
-      }
-
-      if (!terms) {
-        errorMessage.textContent = 'Você deve concordar com os Termos de Uso e Política de Privacidade.';
-        errorMessage.classList.add('show');
-        return;
-      }
-
-      // Se passou em todas as validações
-      successMessage.textContent = '✓ Conta criada com sucesso! Redirecionando...';
-      successMessage.classList.add('show');
-
-      // Simular criação de conta e redirecionar
-      setTimeout(() => {
-        window.location.href = 'login.html';
-      }, 1500);
     }
+
+    function showError(message) {
+      errorMessage.textContent = message;
+      errorMessage.classList.add('show');
+      setTimeout(() => {
+        errorMessage.classList.remove('show');
+      }, 5000);
+    }
+
+    function showSuccess(message) {
+      successMessage.textContent = message;
+      successMessage.classList.add('show');
+    }
+
+    function setButtonLoading(isLoading) {
+      submitBtn.disabled = isLoading;
+      if (isLoading) {
+        submitBtn.innerHTML = '<span class="loading-spinner"></span>Criando conta...';
+      } else {
+        submitBtn.textContent = 'Criar Conta';
+      }
+    }
+
+    registerForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const username = usernameInput.value.trim();
+      const email = emailInput.value.trim();
+      const password = passwordInput.value;
+      const passwordConfirm = passwordConfirmInput.value;
+
+      if (!username || !email || !password || !passwordConfirm) {
+        showError('Por favor, preencha todos os campos');
+        return;
+      }
+
+      if (password !== passwordConfirm) {
+        showError('As senhas não coincidem');
+        return;
+      }
+
+      if (password.length < 6) {
+        showError('A senha deve ter pelo menos 6 caracteres');
+        return;
+      }
+
+      clearMessages();
+      setButtonLoading(true);
+
+      try {
+        const response = await api.register(username, email, password);
+
+        if (response && response.access_token) {
+          showSuccess('✓ Conta criada com sucesso! Redirecionando...');
+          localStorage.setItem('authToken', response.access_token);
+
+          setTimeout(() => {
+            window.location.href = '/home.html';
+          }, 1500);
+        }
+      } catch (error) {
+        console.error('Erro ao registrar:', error);
+        
+        if (error.message.includes('already exists')) {
+          showError('Este email já está registrado');
+        } else if (error.message.includes('network')) {
+          showError('Erro de conexão. Verifique se o backend está rodando.');
+        } else {
+          showError(error.message || 'Erro ao criar conta. Tente novamente.');
+        }
+
+        setButtonLoading(false);
+      }
+    });
+
+    usernameInput.addEventListener('input', clearMessages);
+    emailInput.addEventListener('input', clearMessages);
+    passwordInput.addEventListener('input', clearMessages);
+    passwordConfirmInput.addEventListener('input', clearMessages);
+
+    if (api.isAuthenticated()) {
+      window.location.href = '/home.html';
+    }
+
+    console.log('✓ Registro integrado com sucesso!');
   </script>
 
 </body>

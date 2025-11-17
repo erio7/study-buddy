@@ -10,6 +10,8 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 def hash_password(password: str) -> str:
     """Cria um hash da senha"""
+    if len(password) > 72:
+        raise ValueError('Senha não pode ter mais de 72 caracteres')
     return pwd_context.hash(password)
 
 
