@@ -1,174 +1,510 @@
-# StudyBuddy
+# 📚 StudyBuddy - Gamificação de Estudo
 
-## Gamificação de Estudo: Aplicativo de Desafios Diários
-
-## Visão Geral do Projeto
-
-Este projeto visa criar uma plataforma de gamificação para incentivar e acompanhar a rotina de estudos dos usuários. O aplicativo permite que os usuários criem desafios de estudo (individualmente ou com amigos), estabeleçam metas diárias e mensais, e compitam através de um sistema de pontos e ranking. O diferencial inclui a validação do conhecimento absorvido por meio de perguntas geradas por Inteligência Artificial.
-
-## Funcionalidades Principais
-
-*   **Criação e Gestão de Desafios**:
-    *   Usuários podem criar novos desafios de estudo, definindo a duração (mensal) e a frequência de dias de estudo por semana (ex: 5 dias/semana).
-    *   Participação em desafios existentes, com foco na dinâmica com amigos.
-*   **Registro Diário de Estudo**:
-    *   Registro do que foi estudado no dia (descrição), tempo dedicado ao estudo e upload de uma foto do ambiente de estudo. A foto serve como prova visual do engajamento, sem validação rigorosa inicial.
-    *   Marcação do dia como concluído após o registro.
-*   **Validação de Conhecimento por IA**:
-    *   Após o registro diário, uma IA (integrada com n8n) formula perguntas baseadas no resumo do conteúdo estudado pelo usuário.
-    *   As respostas a essas perguntas são utilizadas para validar o "conhecimento absorvido" e atribuir pontos diários (ex: 5 pontos para a nota máxima por dia).
-*   **Sistema de Pontuação e Ranking**:
-    *   Pontos diários são acumulados e somados no final do mês para um ranking geral, determinando um vencedor no desafio.
-    *   O tempo estudado pode ser um fator secundário na pontuação, mas é uma meta mínima configurável no desafio.
-*   **Notificações**:
-    *   Notificações da IA para solicitar a validação diária do conteúdo estudado.
-
-## Tecnologias Utilizadas
-
-Este projeto é uma aplicação full-stack, construída com as seguintes tecnologias:
-
-*   **Banco de Dados (Database)**:
-    *   **PostgreSQL**: Um poderoso sistema de banco de dados relacional e de código aberto [usuário]. PostgreSQL oferece recursos robustos de replicação (como a replicação baseada em líder) e é conhecido por sua confiabilidade e conformidade com padrões SQL.
-*   **Backend**:
-    *   **Node.js**: Um ambiente de tempo de execução JavaScript que permite a construção de aplicações de servidor eficientes e escaláveis. Será utilizado para a lógica de negócio, interação com o banco de dados e integração com a IA (n8n).
-*   **Frontend**:
-    *   **HTML (HyperText Markup Language)**: A linguagem padrão para estruturar o conteúdo da web. Utilizará tags semânticas HTML5 para criar uma estrutura clara e acessível para a interface do usuário. Elementos como formulários, tabelas e listas serão fundamentais para a apresentação dos desafios e dados de estudo.
-    *   **CSS (Cascading Style Sheets)**: Usado para descrever o estilo e a apresentação dos documentos HTML. Permitirá a estilização de fontes, cores, layouts (como Flexbox e Grid) e o modelo de caixa (Box Model) para um design responsivo e visualmente atraente.
-    *   **JavaScript**: Uma linguagem de script de propósito geral para adicionar interatividade e comportamento dinâmico ao frontend. Será essencial para a manipulação do Document Object Model (DOM), gerenciamento de eventos, funções e lógica do lado do cliente que interage com o backend.
-
-## Estrutura do Projeto (Sugestão)
-
-O projeto pode ser organizado da seguinte forma para separar as responsabilidades do frontend e backend:
-
-my-gamified-study-app/
-├── backend/                # Aplicação Node.js (API, lógica de negócio)
-│   ├── src/                # Código-fonte da aplicação (controllers, models, services)
-│   ├── config/             # Configurações do banco de dados e outros serviços
-│   ├── database/           # Migrações e seeds do PostgreSQL
-│   ├── node_modules/
-│   ├── package.json
-│   └── server.js           # Ponto de entrada do backend
-│
-├── frontend/               # Aplicação HTML, CSS, JavaScript
-│   ├── index.html          # Página principal
-│   ├── css/                # Arquivos CSS (style.css, componentes)
-│   ├── js/                 # Arquivos JavaScript (lógica do cliente, interações com a API)
-│   └── assets/             # Imagens, fontes e outros recursos estáticos
-│
-├── docs/                   # Documentação adicional do projeto
-│
-└── README.md               # Arquivo principal de documentação
-
-## Configuração e Instalação
-
-Para configurar e executar o projeto localmente, siga os passos abaixo:
-
-### Pré-requisitos
-
-Certifique-se de ter os seguintes softwares instalados:
-
-*   **Node.js** e **npm** (ou yarn)
-*   **PostgreSQL**
-*   **Git**
-
-### Passos
-
-1.  **Clonar o Repositório**:
-    ```bash
-    git clone https://github.com/erio7/study-buddy
-    cd https://github.com/erio7/study-buddy
-    ```
-2.  **Configurar o Banco de Dados PostgreSQL**:
-    *   Crie um novo banco de dados PostgreSQL para o projeto.
-    *   Anote as credenciais (usuário, senha, nome do banco, porta).
-    *   Execute os scripts SQL ou migrações localizados em `backend/database/` para criar as tabelas necessárias.
-3.  **Configurar o Backend**:
-    ```bash
-    cd backend
-    npm install
-    ```
-    *   Crie um arquivo `.env` na raiz do diretório `backend` e adicione as variáveis de ambiente necessárias para a conexão com o PostgreSQL e as configurações da IA (n8n). Exemplo:
-        ```
-        DB_HOST=localhost
-        DB_USER=your_user
-        DB_PASSWORD=your_password
-        DB_NAME=your_database_name
-        DB_PORT=5432
-        N8N_WEBHOOK_URL=your_n8n_webhook_url_for_ia_validation
-        ```
-    *   Inicie o servidor backend:
-        ```bash
-        npm start
-        ```
-        O backend estará disponível em `http://localhost:3000` (ou outra porta configurada).
-4.  **Configurar o Frontend**:
-    ```bash
-    cd ../frontend
-    ```
-    *   Para aplicações HTML/CSS/JS puras, basta abrir o arquivo `index.html` em seu navegador web.
-    *   Se estiver utilizando um servidor de desenvolvimento local (como o Live Server para VS Code), inicie-o no diretório `frontend`.
-
-## Como Usar
-
-1.  **Acessar o Aplicativo**: Abra o `index.html` no seu navegador (ou a URL do servidor de desenvolvimento).
-2.  **Criar/Participar de Desafios**: Navegue pela interface para criar seu primeiro desafio de estudo ou junte-se a um já existente com seus amigos.
-3.  **Registrar Estudo Diário**: Preencha o formulário diário com o que você estudou, o tempo dedicado e uma foto do seu local de estudo.
-4.  **Validação da IA**: Acompanhe as notificações da IA para responder às perguntas e validar seu aprendizado.
-5.  **Acompanhar o Progresso**: Verifique seu painel de controle para ver seus pontos e sua posição no ranking mensal.
-
-## Diretrizes de Desenvolvimento
-
-Para garantir a qualidade, manutenção e escalabilidade do projeto, recomendamos aderir aos seguintes princípios:
-
-*   **Código Limpo (Clean Code)**:
-    *   **Nomes Significativos**: Use nomes claros e concisos para variáveis, funções e classes que revelem sua intenção. Evite nomes genéricos ou abreviações obscuras.
-    *   **Funções Pequenas e Únicas**: Cada função deve ter uma única responsabilidade (Princípio da Responsabilidade Única - SRP) e ser o menor possível.
-    *   **Evitar Efeitos Colaterais**: Funções devem produzir os resultados esperados sem alterações inesperadas no estado do sistema.
-    *   **Sem Repetição (DRY - Don't Repeat Yourself)**: Evite duplicar código. Se uma lógica é usada mais de uma vez, ela deve ser abstraída em uma função ou módulo reutilizável.
-*   **Documentação**:
-    *   Mantenha o `README.md` e outras documentações atualizadas e concisas.
-    *   Comentários no código devem explicar o "porquê" (a intenção, as decisões de design, os *trade-offs*) e não o "o quê" (o código em si).
-*   **Testes**:
-    *   Implemente testes de unidade, integração e end-to-end. O "Código Limpo" enfatiza que testes devem ser fáceis de ler, rápidos de executar, independentes, repetíveis, e auto-validáveis (F.I.R.S.T. principle).
-    *   Testes ajudam a garantir a correção do sistema e a proteger contra degradações futuras.
-*   **Comunicação**:
-    *   Fomente a comunicação clara e eficaz dentro da equipe e com os stakeholders, seguindo os princípios de um programador pragmático.
-*   **Modularidade**:
-    *   Organize o código em módulos com responsabilidades bem definidas para facilitar a manutenção e a reutilização.
-
-## Próximos Passos e Considerações Futuras
-
-Com base nas reflexões sobre gamificação, aqui estão algumas áreas para aprofundamento e melhoria contínua:
-
-*   **Qualidade e Relevância das Perguntas da IA**:
-    *   É crucial definir como a IA garantirá a qualidade e a relevância das perguntas, bem como a avaliação da profundidade das respostas para uma pontuação justa.
-    *   Implementar um mecanismo de feedback para que a IA possa refinar e melhorar a geração de perguntas ao longo do tempo.
-*   **Experiência do Usuário com o Sistema de Pontuação**:
-    *   Reavaliar a complexidade de mecanismos como o "gulag" para recuperar pontos, garantindo que adicionem valor sem frustrar o usuário. Considerar "caminhos de revisão guiada" mais simples para conteúdos não validados.
-*   **Validação Robusta do Tempo de Estudo**:
-    *   Integrar um **cronômetro embutido** no aplicativo que pause automaticamente ao sair ou em caso de inatividade. Isso aumentaria a integridade do registro do tempo e minimizaria entradas fraudulentas.
-*   **Dinâmica Social e Anti-Trapaça**:
-    *   Pensar em estratégias para lidar com trapaças ou validações inconsistentes em um ambiente competitivo com amigos.
-    *   Explorar elementos de **cooperação** (além da competição), como bônus para grupos que atingem metas coletivas.
-*   **Motivação a Longo Prazo**:
-    *   Além dos pontos, implementar funcionalidades que incentivem a **motivação intrínseca** e o aprendizado genuíno, como visualização de progresso por tópico, recompensas por sequências de estudo (rachas) ou emblemas por domínio de conteúdo.
-
-## Como Contribuir
-
-Agradecemos a todos que desejam contribuir para este projeto! Para contribuir, siga os passos:
-
-1.  Faça um fork do projeto.
-2.  Crie uma nova branch (`git checkout -b feature/sua-feature`).
-3.  Implemente suas alterações e faça commit (`git commit -m 'feat: Adiciona nova funcionalidade'`). Lembre-se de seguir as diretrizes de desenvolvimento.
-4.  Envie suas alterações para o fork (`git push origin feature/sua-feature`).
-5.  Abra um Pull Request, descrevendo suas alterações.
-
-## Licença
-
-Este projeto está sob a licença erioBD. Veja o arquivo `LICENSE` para mais detalhes.
+> Um aplicativo de gamificação para incentivar e acompanhar a rotina de estudos dos usuários através de desafios, pontos e progresso.
 
 ---
 
-## Protótipo (e MoSCoW)
+## 📖 Visão Geral
 
-   * [Link do Figma](https://www.figma.com/board/bJzkc3zRmqlneONrVM8XMm/MOSCOW---STUDYBUDDY?node-id=0-1&t=E7q75GPXAZJeUcrf-1)
+O **StudyBuddy** é uma plataforma completa de gamificação para estudos que permite aos usuários:
+
+- 🎯 **Criar e Gerenciar Desafios** de estudo com metas diárias e mensais
+- 📝 **Registrar Progresso Diário** com resumos, tempo de estudo e fotos
+- 🤖 **Validar Conhecimento** através de perguntas geradas por IA
+- 📊 **Acompanhar Progresso** através de dashboards e calendários
+- 🔔 **Receber Notificações** para manter a motivação
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+### Backend
+- **Python 3.13** - Linguagem de programação
+- **FastAPI 0.104.1** - Framework web moderno e rápido
+- **SQLAlchemy 2.0.23** - ORM para banco de dados
+- **Uvicorn 0.24.0** - Servidor ASGI
+- **JWT (python-jose)** - Autenticação segura
+- **Bcrypt** - Hash de senhas
+
+### Banco de Dados
+- **PostgreSQL** - Sistema de banco de dados relacional robusto
+- **psycopg2** - Driver PostgreSQL para Python
+
+### Frontend
+- **HTML5** - Estrutura semântica
+- **CSS3** - Styling responsivo
+- **JavaScript Vanilla** - Interatividade e lógica do cliente
+
+### Ferramentas de Desenvolvimento
+- **Postman** - Testes de API
+- **Git** - Controle de versão
+
+---
+
+## 📁 Estrutura do Projeto
+
+```
+study-buddy/
+│
+├── backend/                          # Aplicação FastAPI (API REST)
+│   ├── app/
+│   │   ├── models/                  # Modelos ORM (SQLAlchemy)
+│   │   │   ├── __init__.py
+│   │   │   ├── user.py              # Modelo de Usuário
+│   │   │   ├── session.py           # Modelo de Sessão/Token
+│   │   │   ├── challenge.py         # Modelo de Desafio
+│   │   │   ├── summary.py           # Modelo de Resumo Diário
+│   │   │   ├── question.py          # Modelo de Pergunta
+│   │   │   └── test_result.py       # Modelo de Resultado de Teste
+│   │   │
+│   │   ├── routes/                  # Rotas da API (endpoints)
+│   │   │   ├── __init__.py
+│   │   │   ├── auth.py              # Autenticação (registro, login)
+│   │   │   ├── challenges.py        # CRUD de Desafios
+│   │   │   ├── summaries.py         # CRUD de Resumos
+│   │   │   ├── questions.py         # CRUD de Perguntas
+│   │   │   ├── results.py           # Resultados de Testes
+│   │   │   └── dashboard.py         # Dashboard e Calendário
+│   │   │
+│   │   ├── schemas/                 # Schemas Pydantic (validação)
+│   │   │   ├── __init__.py
+│   │   │   ├── user.py              # Schemas de Usuário
+│   │   │   ├── challenge.py         # Schemas de Desafio
+│   │   │   ├── summary.py           # Schemas de Resumo
+│   │   │   ├── question.py          # Schemas de Pergunta
+│   │   │   └── test_result.py       # Schemas de Resultado
+│   │   │
+│   │   ├── utils/                   # Utilitários
+│   │   │   ├── __init__.py
+│   │   │   ├── security.py          # Hash de senha, JWT
+│   │   │   └── auth.py              # Dependências de autenticação
+│   │   │
+│   │   ├── __init__.py
+│   │   ├── main.py                  # Aplicação principal
+│   │   ├── config.py                # Configurações
+│   │   └── database.py              # Conexão com BD
+│   │
+│   ├── tests/                        # Testes unitários (futuro)
+│   ├── venv/                         # Ambiente virtual Python
+│   ├── .env.example                  # Exemplo de variáveis de ambiente
+│   ├── requirements.txt              # Dependências Python
+│   └── README.md                     # Documentação do backend
+│
+├── frontend/                         # Aplicação HTML/CSS/JS
+│   ├── js/
+│   │   ├── api.js                   # Cliente API (integração com backend)
+│   │   ├── app.js                   # Lógica principal da aplicação
+│   │   └── calendar.js              # Lógica do calendário
+│   │
+│   ├── css/
+│   │   └── style.css                # Estilos globais
+│   │
+│   ├── index.html                   # Página inicial
+│   ├── login.html                   # Página de login
+│   ├── register.html                # Página de registro
+│   ├── home.html                    # Dashboard principal
+│   ├── create-challenge.html        # Criar novo desafio
+│   ├── challenge-detail.html        # Detalhes do desafio
+│   ├── day-view.html                # Registrar dia de estudo
+│   ├── questions.html               # Perguntas de avaliação
+│   ├── results.html                 # Resultados dos testes
+│   ├── profile.html                 # Perfil do usuário
+│   ├── resumo.html                  # Resumo de progresso
+│   └── README.md                    # Documentação do frontend
+│
+├── database/
+│   └── studybuddy_schema.sql        # Script SQL para criar tabelas
+│
+├── docs/                             # Documentação adicional
+│   ├── GUIA_INSTALACAO_E_ESTRUTURA.md
+│   ├── GUIA_TESTES_ENDPOINTS.md
+│   ├── GUIA_POSTMAN.md
+│   └── GUIA_INTEGRACAO_FRONTEND_BACKEND.md
+│
+├── .gitignore
+├── README.md                         # Este arquivo
+└── LICENSE
+
+```
+
+---
+
+## 🚀 Início Rápido
+
+### Pré-requisitos
+
+Certifique-se de ter instalado:
+
+- **Python 3.13+** - [Download](https://www.python.org/downloads/)
+- **PostgreSQL 12+** - [Download](https://www.postgresql.org/download/)
+- **Git** - [Download](https://git-scm.com/)
+- **Postman** (opcional, para testes) - [Download](https://www.postman.com/downloads/)
+
+### 1️⃣ Clonar o Repositório
+
+```bash
+git clone https://github.com/erio7/study-buddy.git
+cd study-buddy
+```
+
+### 2️⃣ Configurar o Banco de Dados
+
+#### 2.1 Criar o Banco de Dados
+
+Abra o **psql** (PostgreSQL CLI):
+
+```bash
+psql -U postgres
+```
+
+Digite a senha do PostgreSQL quando solicitado.
+
+#### 2.2 Criar o Banco
+
+```sql
+CREATE DATABASE studybuddy_db;
+```
+
+#### 2.3 Conectar ao Banco
+
+```sql
+\c studybuddy_db
+```
+
+#### 2.4 Executar o Script SQL
+
+```sql
+\i C:/Users/seu_usuario/study-buddy/database/studybuddy_schema.sql
+```
+
+**Ou no Windows (com barras normais)**:
+
+```sql
+\i C:/Users/seu_usuario/study-buddy/database/studybuddy_schema.sql
+```
+
+#### 2.5 Verificar as Tabelas
+
+```sql
+\dt
+```
+
+Você deve ver as tabelas criadas. Depois, saia:
+
+```sql
+\q
+```
+
+### 3️⃣ Configurar o Backend
+
+#### 3.1 Navegar para a Pasta Backend
+
+```bash
+cd backend
+```
+
+#### 3.2 Criar Ambiente Virtual
+
+```bash
+python -m venv venv
+```
+
+#### 3.3 Ativar o Ambiente Virtual
+
+**Windows:**
+```bash
+venv\Scripts\activate
+```
+
+**Mac/Linux:**
+```bash
+source venv/bin/activate
+```
+
+#### 3.4 Instalar Dependências
+
+```bash
+pip install -r requirements.txt
+```
+
+#### 3.5 Configurar Variáveis de Ambiente
+
+Crie um arquivo `.env` na raiz da pasta `backend`:
+
+```bash
+copy .env.example .env
+```
+
+Abra o arquivo `.env` e configure:
+
+```env
+# Banco de Dados PostgreSQL
+DATABASE_URL=postgresql://postgres:sua_senha@localhost:5432/studybuddy_db
+
+# Segurança
+SECRET_KEY=sua-chave-secreta-muito-segura-aqui
+ALGORITHM=HS256
+ACCESS_TOKEN_EXPIRE_MINUTES=30
+
+# API
+DEBUG=True
+CORS_ORIGINS=["http://localhost:3000", "http://localhost:8000", "http://localhost:5173", "http://localhost:8001"]
+```
+
+**Para gerar uma SECRET_KEY segura:**
+
+```bash
+python -c "import secrets; print(secrets.token_urlsafe(32))"
+```
+
+#### 3.6 Executar o Backend
+
+```bash
+python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+```
+
+**Saída esperada:**
+```
+INFO:     Uvicorn running on http://0.0.0.0:8000
+INFO:     Application startup complete
+```
+
+✅ **Backend rodando em**: http://localhost:8000
+
+### 4️⃣ Configurar o Frontend
+
+#### 4.1 Abrir Nova Aba do Terminal
+
+Mantenha o backend rodando e abra um novo Command Prompt.
+
+#### 4.2 Navegar para a Pasta Frontend
+
+```bash
+cd frontend
+```
+
+#### 4.3 Iniciar Servidor Local
+
+```bash
+python -m http.server 8001
+```
+
+**Saída esperada:**
+```
+Serving HTTP on 0.0.0.0 port 8001 (http://0.0.0.0:8001/) ...
+```
+
+✅ **Frontend rodando em**: http://localhost:8001
+
+### 5️⃣ Acessar a Aplicação
+
+Abra seu navegador e acesse:
+
+- **Frontend**: http://localhost:8001
+- **API Docs (Swagger)**: http://localhost:8000/docs
+- **API ReDoc**: http://localhost:8000/redoc
+
+---
+
+## 📚 Como Usar
+
+### 1. Registrar uma Conta
+
+1. Acesse http://localhost:8001/register.html
+2. Preencha os dados (username, email, senha)
+3. Clique em "Registrar"
+
+### 2. Fazer Login
+
+1. Acesse http://localhost:8001/login.html
+2. Use as credenciais que você registrou
+3. Clique em "Fazer Login"
+
+### 3. Criar um Desafio
+
+1. Após login, clique em "+ Novo Desafio"
+2. Preencha os dados do desafio
+3. Clique em "Criar Desafio"
+
+### 4. Registrar um Dia de Estudo
+
+1. Na página inicial, clique em "Registrar" em um desafio
+2. Preencha o formulário (data, horas, dificuldade, resumo)
+3. Clique em "Registrar Resumo"
+
+### 5. Acompanhar Progresso
+
+1. Acesse o Dashboard para ver:
+   - Desafios ativos
+   - Horas de estudo
+   - Dias com estudo (streak)
+   - Progresso geral
+
+---
+
+## 🧪 Testando a API
+
+### Opção 1: Swagger UI (Recomendado)
+
+1. Acesse http://localhost:8000/docs
+2. Clique em cada endpoint
+3. Clique em "Try it out"
+4. Preencha os dados
+5. Clique em "Execute"
+
+### Opção 2: Postman
+
+1. Descarregue a collection: `StudyBuddy_API.postman_collection.json`
+2. Importe no Postman
+3. Configure a variável `base_url` para `http://localhost:8000`
+4. Teste os endpoints
+
+### Opção 3: cURL
+
+```bash
+# Registrar
+curl -X POST http://localhost:8000/api/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{"username":"teste","email":"teste@example.com","password":"abc123"}'
+
+# Login
+curl -X POST http://localhost:8000/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"teste@example.com","password":"abc123"}'
+```
+
+---
+
+## 📋 Endpoints Principais
+
+### Autenticação
+| Método | Endpoint | Descrição |
+| :--- | :--- | :--- |
+| POST | `/api/auth/register` | Registrar novo usuário |
+| POST | `/api/auth/login` | Fazer login |
+
+### Desafios
+| Método | Endpoint | Descrição |
+| :--- | :--- | :--- |
+| POST | `/api/challenges` | Criar novo desafio |
+| GET | `/api/challenges` | Listar desafios do usuário |
+| GET | `/api/challenges/{id}` | Obter detalhes de um desafio |
+| PUT | `/api/challenges/{id}` | Atualizar desafio |
+| DELETE | `/api/challenges/{id}` | Deletar desafio |
+
+### Resumos
+| Método | Endpoint | Descrição |
+| :--- | :--- | :--- |
+| POST | `/api/summaries` | Criar novo resumo |
+| GET | `/api/summaries` | Listar resumos |
+| GET | `/api/summaries/{id}` | Obter resumo específico |
+| GET | `/api/summaries/by-date/{date}` | Obter resumos de uma data |
+| PUT | `/api/summaries/{id}` | Atualizar resumo |
+| DELETE | `/api/summaries/{id}` | Deletar resumo |
+
+### Dashboard
+| Método | Endpoint | Descrição |
+| :--- | :--- | :--- |
+| GET | `/api/streak-days` | Obter dias com estudo |
+| GET | `/api/day/{date}` | Obter dados de um dia |
+| GET | `/api/dashboard/overview` | Obter visão geral |
+
+**Para mais endpoints, consulte a documentação em `/api/docs`**
+
+---
+
+## 🔐 Segurança
+
+### Autenticação JWT
+
+- Tokens JWT são gerados após login
+- Tokens expiram em 30 minutos
+- Senhas são criptografadas com bcrypt
+- Máximo de 72 caracteres por senha
+
+### Variáveis de Ambiente
+
+Nunca commite o arquivo `.env` com credenciais reais. Use `.env.example` como template.
+
+### CORS
+
+O backend está configurado para aceitar requisições do frontend em `http://localhost:8001`.
+
+---
+
+## 🐛 Solução de Problemas
+
+### Erro: "Connection refused"
+- ✅ Verifique se o PostgreSQL está rodando
+- ✅ Verifique se o backend está rodando em `http://localhost:8000`
+
+### Erro: "Database does not exist"
+- ✅ Verifique se você criou o banco de dados
+- ✅ Verifique se o `DATABASE_URL` está correto no `.env`
+
+### Erro: "password cannot be longer than 72 bytes"
+- ✅ Use uma senha com menos de 72 caracteres
+
+### Erro: "401 Unauthorized"
+- ✅ Verifique se o token JWT é válido
+- ✅ Faça login novamente para obter um novo token
+
+### Erro: "CORS error"
+- ✅ Verifique se o frontend está em `http://localhost:8001`
+- ✅ Verifique a configuração de `CORS_ORIGINS` no `.env`
+
+---
+
+## 📚 Documentação Adicional
+
+- [Guia de Instalação e Estrutura](./docs/GUIA_INSTALACAO_E_ESTRUTURA.md)
+- [Guia de Testes de Endpoints](./docs/GUIA_TESTES_ENDPOINTS.md)
+- [Guia do Postman](./docs/GUIA_POSTMAN.md)
+- [Guia de Integração Frontend-Backend](./docs/GUIA_INTEGRACAO_FRONTEND_BACKEND.md)
+
+---
+
+## 🤝 Como Contribuir
+
+Agradecemos a todos que desejam contribuir! Para contribuir:
+
+1. Faça um fork do projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/sua-feature`)
+3. Commit suas mudanças (`git commit -m 'feat: Adiciona nova funcionalidade'`)
+4. Push para a branch (`git push origin feature/sua-feature`)
+5. Abra um Pull Request
+
+---
+
+
+
+## 📄 Licença
+
+Este projeto está sob a licença **erioBD**. Veja o arquivo `LICENSE` para mais detalhes.
+
+---
+
+## 👥 Autores
+
+- **Eric Amorim** - Desenvolvedor Principal
+
+---
+
+## 📞 Suporte
+
+Para dúvidas, sugestões ou relatórios de bugs, abra uma **Issue** no repositório ou entre em contato através do email.
+
+---
+
+## 🔗 Links Úteis
+
+- [Figma - Protótipo](https://www.figma.com/board/bJzkc3zRmqlneONrVM8XMm/MOSCOW---STUDYBUDDY?node-id=0-1&t=E7q75GPXAZJeUcrf-1)
+- [FastAPI Docs](https://fastapi.tiangolo.com/)
+- [PostgreSQL Docs](https://www.postgresql.org/docs/)
+- [SQLAlchemy Docs](https://docs.sqlalchemy.org/)
+
+---
+
+**Desenvolvido com ❤️ por Eric Amorim**
+
+Last Updated: Novembro 2024
