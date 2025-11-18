@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from typing import List
 from app.database import get_db
-from app.models import User, TestResult, Answer, Question, Challenge
+from app.models import User, TestResult, Answer, Question, Summary
 from app.schemas.test_result import (
     TestResultResponse,
     SubmitAnswersRequest,
@@ -22,26 +22,29 @@ async def submit_answers(
     """
     Submete as respostas de um teste e calcula o resultado.
     
-    - **challenge_id**: ID do desafio
+    - **summary_id**: ID do resumo
     - **answers**: Dicionário com as respostas (ex: {"q1": "a", "q2": "b", ...})
     - **time_spent**: Tempo gasto no teste em minutos (opcional)
     """
-    # Verificar se o desafio existe
-    challenge = db.query(Challenge).filter(Challenge.id == request.challenge_id).first()
+    # Verificar se o resumo existe e pertence ao usuário
+    summary = db.query(Summary).filter(
+        Summary.id == request.summary_id,
+        Summary.user_id == current_user.id
+    ).first()
     
-    if not challenge:
+    if not summary:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail="Desafio não encontrado"
+            detail="Resumo não encontrado"
         )
     
-    # Obter todas as perguntas do desafio
-    questions = db.query(Question).filter(Question.challenge_id == request.challenge_id).all()
+    # Obter todas as perguntas do resumo
+    questions = db.query(Question).filter(Question.summary_id == request.summary_id).all()
     
     if not questions:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Este desafio não possui perguntas"
+            detail="Este resumo não possui perguntas"
         )
     
     # Calcular o resultado
@@ -61,14 +64,14 @@ async def submit_answers(
             )
         
         # Verificar se a resposta está correta
-        is_correct = user_answer.value == question.correct_answer
+        is_correct = user_answer == question.correct_answer
         
         if is_correct:
             correct_count += 1
         
         answers_list.append({
             "question_id": question.id,
-            "user_answer": user_answer.value,
+            "user_answer": user_answer,
             "is_correct": is_correct
         })
     
@@ -78,7 +81,7 @@ async def submit_answers(
     # Criar o resultado do teste
     test_result = TestResult(
         user_id=current_user.id,
-        challenge_id=request.challenge_id,
+        summary_id=request.summary_id,
         score=score,
         correct_count=correct_count,
         total_count=total_count,
@@ -125,24 +128,27 @@ async def get_result(
     return result
 
 
-@router.get("/challenge/{challenge_id}", response_model=List[TestResultResponse])
-async def list_results_by_challenge(
-    challenge_id: int,
+@router.get("/summary/{summary_id}", response_model=List[TestResultResponse])
+async def list_results_by_summary(
+    summary_id: int,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
-    """Lista todos os resultados de um desafio específico"""
-    # Verificar se o desafio existe
-    challenge = db.query(Challenge).filter(Challenge.id == challenge_id).first()
+    """Lista todos os resultados de um resumo específico"""
+    # Verificar se o resumo existe
+    summary = db.query(Summary).filter(
+        Summary.id == summary_id,
+        Summary.user_id == current_user.id
+    ).first()
     
-    if not challenge:
+    if not summary:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail="Desafio não encontrado"
+            detail="Resumo não encontrado"
         )
     
     results = db.query(TestResult).filter(
-        TestResult.challenge_id == challenge_id,
+        TestResult.summary_id == summary_id,
         TestResult.user_id == current_user.id
     ).all()
     

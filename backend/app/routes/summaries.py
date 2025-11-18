@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
-from typing import List
+from typing import List, Optional
 from datetime import date
 from app.database import get_db
 from app.models import User, Summary, SummaryObjective
@@ -78,6 +78,27 @@ async def list_summaries(
     return summaries
 
 
+@router.get("/by-date/{study_date}", response_model=SummaryResponse)
+async def get_summary_by_date(
+    study_date: date,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    """Obtém o resumo de um dia específico"""
+    summary = db.query(Summary).filter(
+        Summary.user_id == current_user.id,
+        Summary.study_date == study_date
+    ).first()
+    
+    if not summary:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Resumo não encontrado para esta data"
+        )
+    
+    return summary
+
+
 @router.get("/{summary_id}", response_model=SummaryResponse)
 async def get_summary(
     summary_id: int,
@@ -95,6 +116,50 @@ async def get_summary(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Resumo não encontrado"
         )
+    
+    return summary
+
+
+@router.put("/{summary_id}", response_model=SummaryResponse)
+async def update_summary(
+    summary_id: int,
+    summary_data: SummaryCreate,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    """Atualiza um resumo existente"""
+    summary = db.query(Summary).filter(
+        Summary.id == summary_id,
+        Summary.user_id == current_user.id
+    ).first()
+    
+    if not summary:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Resumo não encontrado"
+        )
+    
+    # Atualizar campos
+    summary.challenge_id = summary_data.challenge_id
+    summary.study_date = summary_data.study_date
+    summary.study_time = summary_data.study_time
+    summary.difficulty = summary_data.difficulty
+    summary.summary_text = summary_data.summary_text
+    summary.photo_url = summary_data.photo_url
+    
+    # Atualizar objetivos
+    db.query(SummaryObjective).filter(SummaryObjective.summary_id == summary_id).delete()
+    
+    if summary_data.objectives:
+        for objective_text in summary_data.objectives:
+            objective = SummaryObjective(
+                summary_id=summary_id,
+                objective_text=objective_text
+            )
+            db.add(objective)
+    
+    db.commit()
+    db.refresh(summary)
     
     return summary
 

@@ -5,14 +5,14 @@ from datetime import datetime
 
 
 class Question(Base):
-    __tablename__ = "question"
+    __tablename__ = "Question"
     
     id = Column(Integer, primary_key=True, index=True)
-    challenge_id = Column(Integer, ForeignKey("challenge.id", ondelete="CASCADE"), nullable=False)
+    summary_id = Column(Integer, ForeignKey("Summary.id", ondelete="CASCADE"), nullable=False)
     text = Column(Text, nullable=False)
     options = Column(JSON, nullable=False)  # Armazena as opções em formato JSON
     correct_answer = Column(String(1), nullable=False)  # 'a', 'b', 'c', 'd', 'e'
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
     
     def __repr__(self):
-        return f"<Question(id={self.id}, challenge_id={self.challenge_id}, text={self.text[:50]}...)>"
+        return f"<Question(id={self.id}, summary_id={self.summary_id}, text={self.text[:50]}...)>"

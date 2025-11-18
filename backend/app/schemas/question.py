@@ -1,32 +1,23 @@
 from pydantic import BaseModel
 from datetime import datetime
-from typing import Dict, Any
-from enum import Enum
-
-
-class AnswerOption(str, Enum):
-    A = "a"
-    B = "b"
-    C = "c"
-    D = "d"
-    E = "e"
+from typing import Dict
 
 
 class QuestionCreate(BaseModel):
     """Schema para criar uma nova pergunta"""
-    challenge_id: int
+    summary_id: int
     text: str
     options: Dict[str, str]  # {"a": "Opção A", "b": "Opção B", ...}
-    correct_answer: AnswerOption
+    correct_answer: str  # 'a', 'b', 'c', 'd', 'e'
 
 
 class QuestionResponse(BaseModel):
     """Schema para resposta de pergunta"""
     id: int
-    challenge_id: int
+    summary_id: int
     text: str
     options: Dict[str, str]
-    correct_answer: AnswerOption
+    correct_answer: str
     created_at: datetime
     
     class Config:

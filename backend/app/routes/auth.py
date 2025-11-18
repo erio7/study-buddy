@@ -1,10 +1,12 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from datetime import timedelta
+from typing import List
 from app.database import get_db
 from app.models import User
 from app.schemas.user import UserCreate, UserLogin, TokenResponse, UserResponse
 from app.utils.security import hash_password, verify_password, create_access_token
+from app.utils.auth import get_current_user
 
 router = APIRouter(prefix="/api/auth", tags=["Autenticação"])
 
@@ -91,10 +93,28 @@ async def login(credentials: UserLogin, db: Session = Depends(get_db)):
 
 
 @router.get("/me", response_model=UserResponse)
-async def get_current_user_info(current_user: User = Depends(lambda: None)):
+async def get_current_user_info(current_user: User = Depends(get_current_user)):
     """Obtém informações do usuário atual (requer autenticação)"""
-    # Esta rota será atualizada com a autenticação real
-    raise HTTPException(
-        status_code=status.HTTP_401_UNAUTHORIZED,
-        detail="Não autenticado"
-    )
+    return UserResponse.from_orm(current_user)
+
+
+@router.get("/admin/users", response_model=List[UserResponse])
+async def list_all_users(
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    """
+    Lista todos os usuários (apenas para admin).
+    Requer autenticação.
+    """
+    # Verificar se o usuário é admin (ID 1 é o admin padrão)
+    if current_user.id != 1:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Acesso negado. Apenas administradores podem acessar esta rota."
+        )
+    
+    # Obter todos os usuários
+    users = db.query(User).all()
+    
+    return [UserResponse.from_orm(user) for user in users]

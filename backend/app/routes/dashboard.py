@@ -79,7 +79,7 @@ async def get_day_data(
         "formattedDate": study_date.strftime("%d de %B, %Y"),
         "studyTime": f"{summary.study_time // 60}h {summary.study_time % 60}m",
         "subject": challenge_info["subject"] if challenge_info else "Estudo Geral",
-        "difficulty": summary.difficulty.value,
+        "difficulty": summary.difficulty,
         "summary": summary.summary_text,
         "photo": summary.photo_url,
         "objectives": [obj.objective_text for obj in summary.objectives],
@@ -143,7 +143,7 @@ async def get_dashboard_overview(
                 "id": s.id,
                 "date": s.study_date.isoformat(),
                 "studyTime": s.study_time,
-                "difficulty": s.difficulty.value,
+                "difficulty": s.difficulty,
                 "summary": s.summary_text[:100] + "..." if len(s.summary_text) > 100 else s.summary_text
             }
             for s in recent_summaries
@@ -151,7 +151,7 @@ async def get_dashboard_overview(
         "recentResults": [
             {
                 "id": r.id,
-                "challengeId": r.challenge_id,
+                "summaryId": r.summary_id,
                 "score": r.score,
                 "correctCount": r.correct_count,
                 "totalCount": r.total_count,

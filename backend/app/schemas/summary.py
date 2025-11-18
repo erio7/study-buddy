@@ -1,13 +1,6 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, field_validator
 from datetime import datetime, date
 from typing import Optional, List
-from enum import Enum
-
-
-class DifficultyEnum(str, Enum):
-    EASY = "Fácil"
-    MEDIUM = "Médio"
-    HARD = "Difícil"
 
 
 class SummaryObjectiveResponse(BaseModel):
@@ -24,10 +17,18 @@ class SummaryCreate(BaseModel):
     challenge_id: Optional[int] = None
     study_date: date
     study_time: int  # Minutos
-    difficulty: DifficultyEnum
+    difficulty: str
     summary_text: str
     photo_url: Optional[str] = None
     objectives: Optional[List[str]] = None
+    
+    @field_validator('difficulty')
+    @classmethod
+    def validate_difficulty(cls, v):
+        valid_difficulties = ["Fácil", "Médio", "Difícil"]
+        if v not in valid_difficulties:
+            raise ValueError(f"Dificuldade deve ser uma de: {', '.join(valid_difficulties)}")
+        return v
 
 
 class SummaryResponse(BaseModel):
@@ -37,7 +38,7 @@ class SummaryResponse(BaseModel):
     challenge_id: Optional[int]
     study_date: date
     study_time: int
-    difficulty: DifficultyEnum
+    difficulty: str
     summary_text: str
     photo_url: Optional[str]
     objectives: List[SummaryObjectiveResponse]

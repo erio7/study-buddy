@@ -5,7 +5,6 @@ from .question import QuestionCreate, QuestionResponse
 from .test_result import (
     TestResultCreate, 
     TestResultResponse, 
-    AnswerCreate, 
     AnswerResponse,
     SubmitAnswersRequest
 )
@@ -24,7 +23,6 @@ __all__ = [
     "QuestionResponse",
     "TestResultCreate",
     "TestResultResponse",
-    "AnswerCreate",
     "AnswerResponse",
     "SubmitAnswersRequest",
 ]

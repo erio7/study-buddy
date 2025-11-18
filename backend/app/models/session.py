@@ -5,10 +5,10 @@ from datetime import datetime
 
 
 class Session(Base):
-    __tablename__ = "session"
+    __tablename__ = "Session"
     
     id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey("user.id", ondelete="CASCADE"), nullable=False)
+    user_id = Column(Integer, ForeignKey("User.id", ondelete="CASCADE"), nullable=False)
     token = Column(String(255), unique=True, nullable=False, index=True)
     expires_at = Column(DateTime(timezone=True), nullable=False)
     ip_address = Column(String(45), nullable=True)  # Suporta IPv4 e IPv6
