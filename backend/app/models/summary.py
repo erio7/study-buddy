@@ -12,14 +12,14 @@ class DifficultyLevel(str, enum.Enum):
 
 
 class Summary(Base):
-    __tablename__ = "Summary"
+    __tablename__ = "summary"
     __table_args__ = (
         UniqueConstraint("user_id", "study_date", name="uq_user_study_date"),
     )
     
     id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey("User.id", ondelete="CASCADE"), nullable=False)
-    challenge_id = Column(Integer, ForeignKey("Challenge.id", ondelete="SET NULL"), nullable=True)
+    user_id = Column(Integer, ForeignKey("user.id", ondelete="CASCADE"), nullable=False)
+    challenge_id = Column(Integer, ForeignKey("challenge.id", ondelete="SET NULL"), nullable=True)
     study_date = Column(Date, nullable=False)
     study_time = Column(Integer, nullable=False)  # Tempo em minutos
     difficulty = Column(Enum(DifficultyLevel), nullable=False)
@@ -36,10 +36,10 @@ class Summary(Base):
 
 
 class SummaryObjective(Base):
-    __tablename__ = "SummaryObjective"
+    __tablename__ = "summaryobjective"
     
     id = Column(Integer, primary_key=True, index=True)
-    summary_id = Column(Integer, ForeignKey("Summary.id", ondelete="CASCADE"), nullable=False)
+    summary_id = Column(Integer, ForeignKey("summary.id", ondelete="CASCADE"), nullable=False)
     objective_text = Column(String(255), nullable=False)
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
     

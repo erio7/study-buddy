@@ -5,10 +5,10 @@ from datetime import datetime
 
 
 class Question(Base):
-    __tablename__ = "Question"
+    __tablename__ = "question"
     
     id = Column(Integer, primary_key=True, index=True)
-    challenge_id = Column(Integer, ForeignKey("Challenge.id", ondelete="CASCADE"), nullable=False)
+    challenge_id = Column(Integer, ForeignKey("challenge.id", ondelete="CASCADE"), nullable=False)
     text = Column(Text, nullable=False)
     options = Column(JSON, nullable=False)  # Armazena as opções em formato JSON
     correct_answer = Column(String(1), nullable=False)  # 'a', 'b', 'c', 'd', 'e'

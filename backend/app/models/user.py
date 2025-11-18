@@ -4,7 +4,7 @@ from datetime import datetime
 
 
 class User(Base):
-    __tablename__ = "User"
+    __tablename__ = "user"
     
     id = Column(Integer, primary_key=True, index=True)
     username = Column(String(50), unique=True, nullable=False, index=True)

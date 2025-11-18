@@ -5,10 +5,10 @@ from datetime import datetime
 
 
 class Challenge(Base):
-    __tablename__ = "Challenge"
+    __tablename__ = "challenge"
     
     id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey("User.id", ondelete="CASCADE"), nullable=False)
+    user_id = Column(Integer, ForeignKey("user.id", ondelete="CASCADE"), nullable=False)
     name = Column(String(100), nullable=False)
     subject = Column(String(100), nullable=False)
     description = Column(Text, nullable=True)
